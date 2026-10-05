@@ -142,6 +142,7 @@ Real public data makes the app believable; planted scenarios give every eval a k
 **Rules:**
 
 - Check each dataset's license on its page before use.
+- Olist is CC BY-NC-SA 4.0 (checked 2026-10-06): credit Olist and link the dataset wherever it is used, non-commercial use only, derived data shared under the same license. So: never commit the CSVs or a database dump built from them, and keep the import step swappable in case the course is ever sold (generated data would replace Olist).
 - Never commit dataset files; keep them in `data/` (in `.gitignore`) and document the download steps.
 - Use a fixed random seed (`Faker::Config.random = Random.new(42)`) so every learner gets the same data.
 - Start small (500 customers, 2,000 orders) and scale later.
@@ -252,7 +253,7 @@ The project choice is locked. New project plans from other tools are not conside
 - [ ] Final project and repo name (check GitHub and RubyGems first)
 - [ ] Solid Queue + Solid Cache, or Sidekiq + Redis
 - [ ] Olist as the base data, or fully generated data only
-- [ ] Licenses of Olist, Bitext and the Twitter support dataset checked
+- [ ] Licenses of the Twitter support dataset checked (Olist done: CC BY-NC-SA 4.0; Bitext done: CDLA-Sharing-1.0, text at https://cdla.dev/sharing-1-0/, use and results are unrestricted, publishing the data itself requires the same license and credit)
 - [ ] Groq free-tier limits checked in the Groq console
 - [ ] RubyLLM support for Groq confirmed (native or OpenAI-compatible base URL)
 - [ ] RubyLLM support for Ollama embeddings confirmed

@@ -89,6 +89,10 @@ Real public data makes the app believable, and planted scenarios give every eval
 
 Dataset files are not committed. They live in `data/` (git-ignored) and are downloaded separately. Check each dataset's license on its own page before using it.
 
+**Attribution:** the base data is the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). It is used here for non-commercial learning only. This repository contains the import and seed code, not the data or a database built from it.
+
+Customer messages for routing and evals (from Lesson 7) come from the [Bitext customer support dataset](https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset), licensed under [CDLA-Sharing-1.0](https://cdla.dev/sharing-1-0/). The data file is not included here either.
+
 ## Getting started
 
 Requirements: Ruby, PostgreSQL, and the Ruby version set for this app.
