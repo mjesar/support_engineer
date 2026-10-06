@@ -112,4 +112,5 @@ This is a learning project about building a reliable AI agent, not a complete su
 
 ## More
 
-The full plan, with architecture, gems by lesson, data mapping and the evaluation plan, is in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md).
+- The full plan, with architecture, gems by lesson, data mapping and the evaluation plan: [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md)
+- The database tables and how they relate, as a diagram: [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
