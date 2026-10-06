@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_06_135202) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_06_141029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_135202) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["olist_customer_unique_id"], name: "index_customers_on_olist_customer_unique_id", unique: true
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "olist_order_id", null: false
+    t.bigint "customer_id", null: false
+    t.string "status", null: false
+    t.datetime "purchased_at"
+    t.datetime "approved_at"
+    t.datetime "shipped_at"
+    t.datetime "delivered_at"
+    t.datetime "estimated_delivery_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["olist_order_id"], name: "index_orders_on_olist_order_id", unique: true
   end
 
   create_table "products", force: :cascade do |t|
@@ -40,4 +55,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_135202) do
     t.datetime "updated_at", null: false
     t.index ["olist_product_id"], name: "index_products_on_olist_product_id", unique: true
   end
+
+  add_foreign_key "orders", "customers"
 end
