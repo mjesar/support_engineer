@@ -2,10 +2,15 @@ namespace :data do
   desc "Import the Olist dataset"
   task import_olist: :environment do
     Faker::Config.random = Random.new(42)
+    step = ->(message) { puts "#{Time.current.strftime("%H:%M:%S")}  #{message}" }
+
+    OrderItem.delete_all
+    Payment.delete_all
     Order.delete_all
     Product.delete_all
     Customer.delete_all
 
+    step.call("importing customers")
     path = Rails.root.join("data", "olist", "olist_customers_dataset.csv")
     customers_by_unique_id = {}
     customers_by_olist_id = {}
@@ -20,6 +25,7 @@ namespace :data do
 
       unless customer
         email_number += 1
+        step.call("  #{email_number} customers created") if (email_number % 10_000).zero?
         name = Faker::Name.name
         email_domain = email_domains[email_number % email_domains.size]
         customer = Customer.create!(
@@ -35,8 +41,9 @@ namespace :data do
       customers_by_olist_id[row["customer_id"]] = customer
     end
 
-    puts "customers: #{Customer.count}, lookup entries: #{customers_by_olist_id.size}"
+    step.call("customers: #{Customer.count}, lookup entries: #{customers_by_olist_id.size}")
 
+    step.call("importing products")
     translations_path = Rails.root.join("data", "olist", "product_category_name_translation.csv")
     category_translations = {}
 
@@ -64,8 +71,9 @@ namespace :data do
       )
     end
 
-    puts "products: #{Product.count}"
+    step.call("products: #{Product.count}")
 
+    step.call("importing orders")
     orders_path = Rails.root.join("data", "olist", "olist_orders_dataset.csv")
     orders_by_olist_id = {}
     skipped_orders = 0
@@ -91,6 +99,51 @@ namespace :data do
       )
     end
 
-    puts "orders: #{Order.count}, skipped: #{skipped_orders}"
+    step.call("orders: #{Order.count}, skipped: #{skipped_orders}")
+
+    step.call("importing order items")
+    order_items_path = Rails.root.join("data", "olist", "olist_order_items_dataset.csv")
+    skipped_order_items = 0
+
+    CSV.foreach(order_items_path, headers: true) do |row|
+      order = orders_by_olist_id[row["order_id"]]
+
+      unless order
+        skipped_order_items += 1
+        next
+      end
+
+      OrderItem.create!(
+        order: order,
+        product: products_by_olist_id[row["product_id"]],
+        price: row["price"],
+        freight_value: row["freight_value"]
+      )
+    end
+
+    step.call("order items: #{OrderItem.count}, skipped: #{skipped_order_items}")
+
+    step.call("importing payments")
+    payments_path = Rails.root.join("data", "olist", "olist_order_payments_dataset.csv")
+    skipped_payments = 0
+
+    CSV.foreach(payments_path, headers: true) do |row|
+      order = orders_by_olist_id[row["order_id"]]
+
+      unless order
+        skipped_payments += 1
+        next
+      end
+
+      Payment.create!(
+        order: order,
+        sequence: row["payment_sequential"],
+        payment_method: row["payment_type"],
+        installments: row["payment_installments"],
+        amount: row["payment_value"]
+      )
+    end
+
+    step.call("payments: #{Payment.count}, skipped: #{skipped_payments}")
   end
 end
