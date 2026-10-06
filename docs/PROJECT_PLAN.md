@@ -261,11 +261,13 @@ The project choice is locked. New project plans from other tools are not conside
 
 ## 12. Current step: Lesson 1 checklist
 
-- [ ] Create the app: `rails new <name> --database=postgresql --css=tailwind`
-- [ ] Add `data/` to `.gitignore`
-- [ ] Download the Olist dataset into `data/olist/` and check its license
-- [ ] Note the column names of `orders`, `order_items`, `customers` and `products`
-- [ ] Write the migrations for `Customer`, `Product`, `Order`, `OrderItem`, `Payment`, `Shipment`
-- [ ] Write the import task (`bin/rails data:import_olist`)
+- [x] Create the app: `rails new <name> --database=postgresql --css=tailwind`
+- [x] Add `data/` to `.gitignore`
+- [x] Download the Olist dataset into `data/olist/` and check its license
+- [x] Note the column names of `orders`, `order_items`, `customers` and `products`
+- [x] Write the migrations for `Customer`, `Product`, `Order`, `OrderItem`, `Payment`, `Shipment`
+- [ ] Write the import task (`bin/rails data:import_olist`): written and tested on a sample, batching and a full run still to do
 - [ ] Write the scenario seed script with a fixed random seed
 - [ ] Tag `lesson-01`
+
+Detailed progress, decisions and measured results: [lessons/01-data-model-and-import.md](lessons/01-data-model-and-import.md).

@@ -104,7 +104,14 @@ bin/rails db:migrate
 bin/dev
 ```
 
-The dataset import task and the scenario seed script are part of Lesson 1 and do not exist yet.
+Put the Olist files in `data/olist/` (see the Data section), then load them:
+
+```bash
+LIMIT=200 bin/rails data:import_olist   # small sample: 200 customers and their orders, about half a minute
+bin/rails data:import_olist             # the full dataset
+```
+
+Each step prints how many rows it loaded and how many it skipped. The scenario seed script is still to come in Lesson 1.
 
 ## Scope
 
@@ -114,3 +121,5 @@ This is a learning project about building a reliable AI agent, not a complete su
 
 - The full plan, with architecture, gems by lesson, data mapping and the evaluation plan: [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md)
 - The database tables and how they relate, as a diagram: [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
+- Lesson progress, decisions and what broke: [docs/lessons/01-data-model-and-import.md](docs/lessons/01-data-model-and-import.md)
+- Index of all documentation: [docs/README.md](docs/README.md)
