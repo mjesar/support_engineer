@@ -52,12 +52,11 @@ namespace :data do
     end
 
     products_path = Rails.root.join("data", "olist", "olist_products_dataset.csv")
-    products_by_olist_id = {}
 
-    CSV.foreach(products_path, headers: true) do |row|
+    product_rows = CSV.foreach(products_path, headers: true).map do |row|
       portuguese_category = row["product_category_name"]
 
-      products_by_olist_id[row["product_id"]] = Product.create!(
+      {
         olist_product_id: row["product_id"],
         name: Faker::Commerce.product_name,
         category: category_translations.fetch(portuguese_category, portuguese_category),
@@ -68,8 +67,11 @@ namespace :data do
         length_cm: row["product_length_cm"],
         height_cm: row["product_height_cm"],
         width_cm: row["product_width_cm"]
-      )
+      }
     end
+
+    product_rows.each_slice(1_000) { |batch| Product.insert_all(batch) }
+    product_ids_by_olist_id = Product.pluck(:olist_product_id, :id).to_h
 
     step.call("products: #{Product.count}")
 
@@ -115,7 +117,7 @@ namespace :data do
 
       OrderItem.create!(
         order: order,
-        product: products_by_olist_id[row["product_id"]],
+        product_id: product_ids_by_olist_id[row["product_id"]],
         price: row["price"],
         freight_value: row["freight_value"]
       )
