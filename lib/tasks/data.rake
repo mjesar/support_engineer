@@ -2,6 +2,7 @@ namespace :data do
   desc "Import the Olist dataset"
   task import_olist: :environment do
     Faker::Config.random = Random.new(42)
+    Order.delete_all
     Product.delete_all
     Customer.delete_all
 
@@ -64,5 +65,32 @@ namespace :data do
     end
 
     puts "products: #{Product.count}"
+
+    orders_path = Rails.root.join("data", "olist", "olist_orders_dataset.csv")
+    orders_by_olist_id = {}
+    skipped_orders = 0
+
+    CSV.foreach(orders_path, headers: true) do |row|
+      customer = customers_by_olist_id[row["customer_id"]]
+
+      # With LIMIT only some customers exist, so their orders are the only ones we can keep
+      unless customer
+        skipped_orders += 1
+        next
+      end
+
+      orders_by_olist_id[row["order_id"]] = Order.create!(
+        olist_order_id: row["order_id"],
+        customer: customer,
+        status: row["order_status"],
+        purchased_at: row["order_purchase_timestamp"],
+        approved_at: row["order_approved_at"],
+        shipped_at: row["order_delivered_carrier_date"],
+        delivered_at: row["order_delivered_customer_date"],
+        estimated_delivery_at: row["order_estimated_delivery_date"]
+      )
+    end
+
+    puts "orders: #{Order.count}, skipped: #{skipped_orders}"
   end
 end
