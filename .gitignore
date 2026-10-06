@@ -39,3 +39,6 @@
 
 # Dataset files (Olist etc.), downloaded locally, never committed
 /data/
+
+# Personal interview prep notes, local only
+/docs/interview/
