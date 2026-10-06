@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_06_141535) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_06_143358) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,6 +51,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_141535) do
     t.index ["olist_order_id"], name: "index_orders_on_olist_order_id", unique: true
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "sequence"
+    t.string "payment_method"
+    t.integer "installments"
+    t.decimal "amount", precision: 10, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "olist_product_id", null: false
     t.string "name"
@@ -67,7 +78,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_141535) do
     t.index ["olist_product_id"], name: "index_products_on_olist_product_id", unique: true
   end
 
+  create_table "shipments", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.string "carrier"
+    t.string "tracking_number"
+    t.string "status", null: false
+    t.string "last_known_location"
+    t.datetime "last_scan_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_shipments_on_order_id", unique: true
+  end
+
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "customers"
+  add_foreign_key "payments", "orders"
+  add_foreign_key "shipments", "orders"
 end
