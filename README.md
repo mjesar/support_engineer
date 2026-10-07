@@ -108,7 +108,7 @@ Put the Olist files in `data/olist/` (see the Data section), then load them:
 
 ```bash
 LIMIT=200 bin/rails data:import_olist   # small sample: 200 customers and their orders, about half a minute
-bin/rails data:import_olist             # the full dataset
+bin/rails data:import_olist             # the full dataset, about 3 minutes
 bin/rails data:plant_scenarios          # shipments for every order, plus the planted scenarios
 ```
 
