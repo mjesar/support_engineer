@@ -24,7 +24,7 @@ jobs:
           GITLAB_MIRROR_SSH_KEY: ${{ secrets.GITLAB_MIRROR_SSH_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$GITLAB_MIRROR_SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$GITLAB_MIRROR_SSH_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
