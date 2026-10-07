@@ -1,6 +1,16 @@
-# AI Support Engineer: a production-style AI agent in Ruby on Rails
+<h1 align="center">
+  <img src="assets/readme/banner.svg" alt="AI Support Engineer: a production-style AI agent in Ruby on Rails that investigates orders, searches company policies and asks a human before it acts" width="100%">
+</h1>
 
-A support agent that investigates customer problems, searches company policies, checks real order data, and takes safe actions only with human approval.
+<p align="center"><strong>A support agent that investigates customer problems, searches company policies, checks real order data, and takes safe actions only with human approval.</strong></p>
+
+<p align="center">
+  <a href="https://github.com/mjesar/support_engineer/actions/workflows/ci.yml"><img src="https://github.com/mjesar/support_engineer/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <img src="https://img.shields.io/badge/Ruby-4.0-CC342D?logo=ruby&logoColor=white" alt="Ruby 4.0">
+  <img src="https://img.shields.io/badge/Rails-8.1-CC0000?logo=rubyonrails&logoColor=white" alt="Rails 8.1">
+  <img src="https://img.shields.io/badge/PostgreSQL-database-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/status-learning%20project-f59e0b" alt="Status: learning project">
+</p>
 
 > **Status:** Lesson 1 of 14 is done: a normal Rails app with real and planted data, and no AI yet. Lesson 2 (the first LLM call) is next. This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
 
