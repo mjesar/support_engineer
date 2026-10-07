@@ -60,6 +60,54 @@ Tools are plain Ruby classes. The agent and the MCP server only wrap them, so th
 | `create_return`, `create_replacement_order` | Write, high risk | Human approval |
 | `issue_refund`, `cancel_order` | Write, high risk | Human approval and confirmation |
 
+## Quick start
+
+About five minutes, three of them the import. You need Ruby 4.0.7, PostgreSQL and a free Kaggle account.
+
+1. Download the [Olist dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and unzip it into `data/olist/`. The importer reads six of its files: customers, products, orders, order items, order payments and the category translation file. The files are not in the repo because of the dataset license.
+2. Set up the app, load the data and plant the test scenarios:
+
+```bash
+bundle install
+bin/rails db:create db:migrate
+bin/rails data:import_olist
+bin/rails data:plant_scenarios
+```
+
+The import prints how many rows each step kept and skipped (nothing is skipped on the full dataset):
+
+```
+15:40:47  importing customers
+15:41:43  customers: 96096, lookup entries: 99441
+15:41:43  importing products
+15:41:57  products: 32951
+15:41:57  importing orders
+15:43:03  orders: 99441, skipped: 0
+15:43:03  importing order items
+15:43:22  order items: 112650, skipped: 0
+15:43:22  importing payments
+15:43:39  payments: 103886, skipped: 0
+```
+
+`data:plant_scenarios` generates a shipment for every order that reached a carrier, then edits five fixed orders so each tells one story with a known answer:
+
+```
+shipments: 97658
+delayed shipment: order 1
+lost package: order 2
+return window closed: order 3
+final sale item: order 4
+duplicate charge: order 5
+```
+
+3. Check that everything works:
+
+```bash
+bundle exec rspec    # 20 examples, 0 failures
+```
+
+For a quick try, `LIMIT=200 bin/rails data:import_olist` loads only 200 customers and their orders in under a minute. There is no chat or web screen yet, so there is nothing to open in a browser. The agent arrives from lesson 2.
+
 ## Tech stack
 
 | Area | Choice |
@@ -132,27 +180,6 @@ Dataset files are not committed. They live in `data/` (git-ignored) and are down
 **Attribution:** the base data is the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). It is used here for non-commercial learning only. This repository contains the import and seed code, not the data or a database built from it.
 
 Customer messages for routing and evals (from Lesson 7) come from the [Bitext customer support dataset](https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset), licensed under [CDLA-Sharing-1.0](https://cdla.dev/sharing-1-0/). The data file is not included here either.
-
-## Getting started
-
-Requirements: Ruby, PostgreSQL, and the Ruby version set for this app.
-
-```bash
-bundle install
-bin/rails db:create
-bin/rails db:migrate
-bin/dev
-```
-
-Put the Olist files in `data/olist/` (see the Data section), then load them:
-
-```bash
-LIMIT=200 bin/rails data:import_olist   # small sample: 200 customers and their orders, about half a minute
-bin/rails data:import_olist             # the full dataset, about 3 minutes
-bin/rails data:plant_scenarios          # shipments for every order, plus the planted scenarios
-```
-
-Each import step prints how many rows it loaded and how many it skipped. `data:plant_scenarios` first generates the shipments, then edits five fixed orders (the first five that have a shipment) so each has a known answer for the evals. It prints the order id of each scenario, and running it again gives the same result.
 
 ## Scope
 
