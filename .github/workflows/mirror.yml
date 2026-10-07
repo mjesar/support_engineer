@@ -1,0 +1,37 @@
+name: Mirror to GitLab
+
+# GitHub is the source of truth. Every push, tag and branch deletion is copied to GitLab.
+# Only git data is mirrored: pull requests, issues and CI results stay on GitHub.
+on:
+  push:
+  delete:
+
+concurrency:
+  group: mirror-to-gitlab
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up SSH key for GitLab
+        env:
+          GITLAB_MIRROR_SSH_KEY: ${{ secrets.GITLAB_MIRROR_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$GITLAB_MIRROR_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+
+      # Detach first: git refuses to fetch into the branch that is checked out.
+      # Copying every branch into refs/heads avoids pushing a stray "HEAD" branch to GitLab.
+      - name: Push all branches and tags to GitLab
+        run: |
+          git checkout --detach
+          git fetch --prune origin "+refs/heads/*:refs/heads/*" "+refs/tags/*:refs/tags/*"
+          git push --prune git@gitlab.com:mjesar/support_engineer.git "+refs/heads/*:refs/heads/*" "+refs/tags/*:refs/tags/*"
