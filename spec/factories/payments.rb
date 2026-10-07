@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :payment do
-    order { nil }
+    order
     add_attribute(:sequence) { 1 }
-    payment_method { "MyString" }
+    payment_method { "credit_card" }
     installments { 1 }
-    amount { "9.99" }
+    amount { "59.90" }
   end
 end

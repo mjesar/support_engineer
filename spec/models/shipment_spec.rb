@@ -1,5 +1,14 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Shipment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "belongs to an order" do
+    expect(create(:shipment).order).to be_a(Order)
+  end
+
+  it "allows only one shipment per order" do
+    order = create(:order)
+    create(:shipment, order: order)
+
+    expect { create(:shipment, order: order) }.to raise_error(ActiveRecord::RecordNotUnique)
+  end
 end
