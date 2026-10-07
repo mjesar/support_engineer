@@ -1,8 +1,18 @@
-# AI Support Engineer: a production-style AI agent in Ruby on Rails
+<h1 align="center">
+  <img src="assets/readme/banner.svg" alt="AI Support Engineer: a production-style AI agent in Ruby on Rails that investigates orders, searches company policies and asks a human before it acts" width="100%">
+</h1>
 
-A support agent that investigates customer problems, searches company policies, checks real order data, and takes safe actions only with human approval.
+<p align="center"><strong>A support agent that investigates customer problems, searches company policies, checks real order data, and takes safe actions only with human approval.</strong></p>
 
-> **Status:** early development (Lesson 1 of 14). This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
+<p align="center">
+  <a href="https://github.com/mjesar/support_engineer/actions/workflows/ci.yml"><img src="https://github.com/mjesar/support_engineer/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <img src="https://img.shields.io/badge/Ruby-4.0-CC342D?logo=ruby&logoColor=white" alt="Ruby 4.0">
+  <img src="https://img.shields.io/badge/Rails-8.1-CC0000?logo=rubyonrails&logoColor=white" alt="Rails 8.1">
+  <img src="https://img.shields.io/badge/PostgreSQL-database-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/status-learning%20project-f59e0b" alt="Status: learning project">
+</p>
+
+> **Status:** Lesson 1 of 14 is done: a normal Rails app with real and planted data, and no AI yet. Lesson 2 (the first LLM call) is next. This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
 
 ## The problem
 
@@ -18,6 +28,13 @@ This project builds that system, and measures whether it gets it right.
 
 An agent that reasons and uses tools instead of answering from memory:
 
+<p align="center">
+  <img src="assets/readme/agent-loop.svg" alt="Diagram of the seven steps the agent takes for one support case: route, act, retrieve, decide, approve, execute and answer. The first four steps only read data. Approve and execute need a human to say yes. If the agent lacks facts it loops from decide back to act." width="100%">
+</p>
+
+<details>
+<summary>Text version of the diagram</summary>
+
 1. **Route:** decide what the message needs (order data, policy, or both).
 2. **Act:** call read tools such as `get_order` and `get_shipment`.
 3. **Retrieve:** search policy documents (RAG) for the relevant rule.
@@ -25,6 +42,10 @@ An agent that reasons and uses tools instead of answering from memory:
 5. **Ask for approval:** a support person sees the proposed action with the evidence.
 6. **Execute and audit:** the action runs and is written to an audit log.
 7. **Answer:** the customer gets a reply that cites the order status and the policy section.
+
+Steps 1 to 4 only read data, and if the agent does not have enough facts after deciding, it goes back to step 2 and calls more tools. Steps 5 and 6 change something, so a human has to say yes first.
+
+</details>
 
 Every step is traced, and each scenario is also an eval case with a known correct answer.
 
@@ -38,6 +59,54 @@ Tools are plain Ruby classes. The agent and the MCP server only wrap them, so th
 | `update_address` | Write, low risk | Automatic after a policy check |
 | `create_return`, `create_replacement_order` | Write, high risk | Human approval |
 | `issue_refund`, `cancel_order` | Write, high risk | Human approval and confirmation |
+
+## Quick start
+
+About five minutes, three of them the import. You need Ruby 4.0.7, PostgreSQL and a free Kaggle account.
+
+1. Download the [Olist dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and unzip it into `data/olist/`. The importer reads six of its files: customers, products, orders, order items, order payments and the category translation file. The files are not in the repo because of the dataset license.
+2. Set up the app, load the data and plant the test scenarios:
+
+```bash
+bundle install
+bin/rails db:create db:migrate
+bin/rails data:import_olist
+bin/rails data:plant_scenarios
+```
+
+The import prints how many rows each step kept and skipped (nothing is skipped on the full dataset):
+
+```
+15:40:47  importing customers
+15:41:43  customers: 96096, lookup entries: 99441
+15:41:43  importing products
+15:41:57  products: 32951
+15:41:57  importing orders
+15:43:03  orders: 99441, skipped: 0
+15:43:03  importing order items
+15:43:22  order items: 112650, skipped: 0
+15:43:22  importing payments
+15:43:39  payments: 103886, skipped: 0
+```
+
+`data:plant_scenarios` generates a shipment for every order that reached a carrier, then edits five fixed orders so each tells one story with a known answer:
+
+```
+shipments: 97658
+delayed shipment: order 1
+lost package: order 2
+return window closed: order 3
+final sale item: order 4
+duplicate charge: order 5
+```
+
+3. Check that everything works:
+
+```bash
+bundle exec rspec    # 20 examples, 0 failures
+```
+
+For a quick try, `LIMIT=200 bin/rails data:import_olist` loads only 200 customers and their orders in under a minute. There is no chat or web screen yet, so there is nothing to open in a browser. The agent arrives from lesson 2.
 
 ## Tech stack
 
@@ -58,7 +127,7 @@ Gems are added in the lesson that needs them, not all at once. All LLM calls wil
 Three milestones, 14 lessons. Each lesson changes the same application and gets a Git tag (`lesson-01`, `lesson-02`, ...).
 
 **Milestone 1: a working support agent**
-1. A normal Rails app with real and planted data (no AI yet) **(in progress)**
+1. A normal Rails app with real and planted data (no AI yet) **(done)**
 2. First LLM call and structured output
 3. Tool calling with read tools
 4. The agent loop, written by hand
@@ -87,32 +156,30 @@ Real public data makes the app believable, and planted scenarios give every eval
 - **Planted scenarios:** added by a seed script with a fixed random seed, so everyone gets the same data. First set: delayed shipment, lost package, return window closed, final sale item, duplicate charge.
 - **Policies:** written by hand, with deliberate exceptions, because exceptions are where weak retrieval fails.
 
+### Data model
+
+Six tables hold the customers, orders, payments and shipments the agent will investigate. The full notes are in [docs/DATA_MODEL.md](docs/DATA_MODEL.md).
+
+<p align="center">
+  <img src="assets/readme/data-model.svg" alt="Diagram of the six database tables and how they relate: a customer places many orders, an order contains many order items that each point at a product, an order is paid by many payments and shipped as at most one shipment." width="100%">
+</p>
+
+**Click a table to open its model:**
+
+<p align="center">
+  <a href="app/models/customer.rb"><img src="assets/readme/tables/customers.svg" alt="The customers table. Opens app/models/customer.rb" width="31%"></a>
+  <a href="app/models/order.rb"><img src="assets/readme/tables/orders.svg" alt="The orders table. Opens app/models/order.rb" width="31%"></a>
+  <a href="app/models/order_item.rb"><img src="assets/readme/tables/order_items.svg" alt="The order_items table. Opens app/models/order_item.rb" width="31%"></a>
+  <a href="app/models/product.rb"><img src="assets/readme/tables/products.svg" alt="The products table. Opens app/models/product.rb" width="31%"></a>
+  <a href="app/models/payment.rb"><img src="assets/readme/tables/payments.svg" alt="The payments table. Opens app/models/payment.rb" width="31%"></a>
+  <a href="app/models/shipment.rb"><img src="assets/readme/tables/shipments.svg" alt="The shipments table. Opens app/models/shipment.rb" width="31%"></a>
+</p>
+
 Dataset files are not committed. They live in `data/` (git-ignored) and are downloaded separately. Check each dataset's license on its own page before using it.
 
 **Attribution:** the base data is the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). It is used here for non-commercial learning only. This repository contains the import and seed code, not the data or a database built from it.
 
 Customer messages for routing and evals (from Lesson 7) come from the [Bitext customer support dataset](https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset), licensed under [CDLA-Sharing-1.0](https://cdla.dev/sharing-1-0/). The data file is not included here either.
-
-## Getting started
-
-Requirements: Ruby, PostgreSQL, and the Ruby version set for this app.
-
-```bash
-bundle install
-bin/rails db:create
-bin/rails db:migrate
-bin/dev
-```
-
-Put the Olist files in `data/olist/` (see the Data section), then load them:
-
-```bash
-LIMIT=200 bin/rails data:import_olist   # small sample: 200 customers and their orders, about half a minute
-bin/rails data:import_olist             # the full dataset, about 3 minutes
-bin/rails data:plant_scenarios          # shipments for every order, plus the planted scenarios
-```
-
-Each import step prints how many rows it loaded and how many it skipped. `data:plant_scenarios` first generates the shipments, then edits five fixed orders (the first five that have a shipment) so each has a known answer for the evals. It prints the order id of each scenario, and running it again gives the same result.
 
 ## Scope
 
@@ -124,3 +191,4 @@ This is a learning project about building a reliable AI agent, not a complete su
 - The database tables and how they relate, as a diagram: [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
 - Lesson progress, decisions and what broke: [docs/lessons/01-data-model-and-import.md](docs/lessons/01-data-model-and-import.md)
 - Index of all documentation: [docs/README.md](docs/README.md)
+- Where the code lives: this GitHub repo is the source of truth, and pull requests and issues are here. A read-only mirror is kept on [GitLab](https://gitlab.com/mjesar/support_engineer).

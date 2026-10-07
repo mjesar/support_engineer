@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">How the AI Support Engineer handles one support case</title>
+  <desc id="desc">A customer message goes through seven steps: route, act, retrieve, decide, approve, execute and answer. The first four are read-only. Approve and execute need a human. If the agent does not have enough facts it loops back from decide to act.</desc>
+  <rect width="1200" height="500" rx="16" fill="#0f172a"/>
+  <text x="50" y="44" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#e2e8f0">How the agent handles one support case</text>
+  <rect x="50" y="62" width="1100" height="46" rx="10" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="600" y="91" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-style="italic" fill="#cbd5e1">"My order #1042 has not arrived and it has been two weeks. If it is lost, please send a replacement."</text>
+  <line x1="120" y1="110" x2="120" y2="132" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="120,142 115,132 125,132" fill="#94a3b8"/>
+  <rect x="50" y="145" width="140" height="150" rx="12" fill="#134e4a" stroke="#2dd4bf" stroke-width="2"/>
+  <circle cx="74" cy="173" r="14" fill="#2dd4bf"/>
+  <text x="74" y="179" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#0f172a">1</text>
+  <text x="96" y="179" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#99f6e4">Route</text>
+  <text x="66" y="223" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">Needs order data,</text>
+  <text x="66" y="245" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">policy, or both?</text>
+  <line x1="192" y1="220" x2="200" y2="220" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="208,220 199,215 199,225" fill="#94a3b8"/>
+  <rect x="210" y="145" width="140" height="150" rx="12" fill="#134e4a" stroke="#2dd4bf" stroke-width="2"/>
+  <circle cx="234" cy="173" r="14" fill="#2dd4bf"/>
+  <text x="234" y="179" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#0f172a">2</text>
+  <text x="256" y="179" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#99f6e4">Act</text>
+  <text x="226" y="223" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">Calls get_order</text>
+  <text x="226" y="245" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">and get_shipment</text>
+  <line x1="352" y1="220" x2="360" y2="220" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="368,220 359,215 359,225" fill="#94a3b8"/>
+  <rect x="370" y="145" width="140" height="150" rx="12" fill="#134e4a" stroke="#2dd4bf" stroke-width="2"/>
+  <circle cx="394" cy="173" r="14" fill="#2dd4bf"/>
+  <text x="394" y="179" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#0f172a">3</text>
+  <text x="416" y="179" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#99f6e4">Retrieve</text>
+  <text x="386" y="223" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">Searches policy</text>
+  <text x="386" y="245" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">documents for</text>
+  <text x="386" y="267" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">the rule</text>
+  <line x1="512" y1="220" x2="520" y2="220" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="528,220 519,215 519,225" fill="#94a3b8"/>
+  <rect x="530" y="145" width="140" height="150" rx="12" fill="#134e4a" stroke="#2dd4bf" stroke-width="2"/>
+  <circle cx="554" cy="173" r="14" fill="#2dd4bf"/>
+  <text x="554" y="179" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#0f172a">4</text>
+  <text x="576" y="179" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#99f6e4">Decide</text>
+  <text x="546" y="223" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">A replacement is</text>
+  <text x="546" y="245" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">a write action</text>
+  <line x1="672" y1="220" x2="680" y2="220" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="688,220 679,215 679,225" fill="#94a3b8"/>
+  <rect x="690" y="145" width="140" height="150" rx="12" fill="#451a03" stroke="#fbbf24" stroke-width="2"/>
+  <circle cx="714" cy="173" r="14" fill="#fbbf24"/>
+  <text x="714" y="179" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#0f172a">5</text>
+  <text x="736" y="179" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#fde68a">Approve</text>
+  <text x="706" y="223" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">A person reviews</text>
+  <text x="706" y="245" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">the evidence</text>
+  <line x1="832" y1="220" x2="840" y2="220" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="848,220 839,215 839,225" fill="#94a3b8"/>
+  <rect x="850" y="145" width="140" height="150" rx="12" fill="#451a03" stroke="#fbbf24" stroke-width="2"/>
+  <circle cx="874" cy="173" r="14" fill="#fbbf24"/>
+  <text x="874" y="179" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#0f172a">6</text>
+  <text x="896" y="179" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#fde68a">Execute</text>
+  <text x="866" y="223" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">The action runs</text>
+  <text x="866" y="245" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">and is logged</text>
+  <line x1="992" y1="220" x2="1000" y2="220" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="1008,220 999,215 999,225" fill="#94a3b8"/>
+  <rect x="1010" y="145" width="140" height="150" rx="12" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+  <circle cx="1034" cy="173" r="14" fill="#94a3b8"/>
+  <text x="1034" y="179" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#0f172a">7</text>
+  <text x="1056" y="179" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#e2e8f0">Answer</text>
+  <text x="1026" y="223" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">Reply cites the</text>
+  <text x="1026" y="245" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">order status and</text>
+  <text x="1026" y="267" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#e2e8f0">policy section</text>
+  <path d="M 600 297 L 600 333 L 280 333 L 280 305" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 5"/>
+  <polygon points="280,298 275,307 285,307" fill="#94a3b8"/>
+  <text x="440" y="357" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#94a3b8">Not enough facts yet? Go around again.</text>
+  <line x1="50" y1="400" x2="670" y2="400" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round"/>
+  <text x="360" y="426" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#99f6e4">Reads only: nothing is changed</text>
+  <line x1="690" y1="400" x2="990" y2="400" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+  <text x="840" y="426" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#fde68a">A human says yes first</text>
+  <text x="50" y="476" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#64748b">Target design. Built lesson by lesson: lesson 1 (the data) is done, the agent itself is not built yet.</text>
+</svg>

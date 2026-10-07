@@ -12,6 +12,12 @@ holds the working conventions.
 - Setup and docs files (README, `docs/`, `.gitignore`, `example_data/`) can be written directly.
 - Follow the global git rules: he runs git himself, so suggest commit messages (lowercase,
   single line) rather than committing; work on branches; remind at checkpoints.
+- GitHub is the source of truth. A GitHub Action mirrors every push to GitLab, so merge and push
+  on GitHub only (see `.github/workflows/mirror.yml`).
+- **Gem-gap log.** When we hand-write something generic that a gem could do, or a search shows a gem
+  already covers it, add an entry with the date checked to the "Gem-gap log" in `~/.claude/IDEAS.md`.
+  Search RubyGems and GitHub first, log "already covered" results too, and only build a gem after a
+  second real use.
 
 ## Design principle: the inside should be as beautiful as the outside
 
