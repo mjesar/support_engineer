@@ -108,6 +108,25 @@ Real public data makes the app believable, and planted scenarios give every eval
 - **Planted scenarios:** added by a seed script with a fixed random seed, so everyone gets the same data. First set: delayed shipment, lost package, return window closed, final sale item, duplicate charge.
 - **Policies:** written by hand, with deliberate exceptions, because exceptions are where weak retrieval fails.
 
+### Data model
+
+Six tables hold the customers, orders, payments and shipments the agent will investigate. The full notes are in [docs/DATA_MODEL.md](docs/DATA_MODEL.md).
+
+<p align="center">
+  <img src="assets/readme/data-model.svg" alt="Diagram of the six database tables and how they relate: a customer places many orders, an order contains many order items that each point at a product, an order is paid by many payments and shipped as at most one shipment." width="100%">
+</p>
+
+**Click a table to open its model:**
+
+<p align="center">
+  <a href="app/models/customer.rb"><img src="assets/readme/tables/customers.svg" alt="The customers table. Opens app/models/customer.rb" width="31%"></a>
+  <a href="app/models/order.rb"><img src="assets/readme/tables/orders.svg" alt="The orders table. Opens app/models/order.rb" width="31%"></a>
+  <a href="app/models/order_item.rb"><img src="assets/readme/tables/order_items.svg" alt="The order_items table. Opens app/models/order_item.rb" width="31%"></a>
+  <a href="app/models/product.rb"><img src="assets/readme/tables/products.svg" alt="The products table. Opens app/models/product.rb" width="31%"></a>
+  <a href="app/models/payment.rb"><img src="assets/readme/tables/payments.svg" alt="The payments table. Opens app/models/payment.rb" width="31%"></a>
+  <a href="app/models/shipment.rb"><img src="assets/readme/tables/shipments.svg" alt="The shipments table. Opens app/models/shipment.rb" width="31%"></a>
+</p>
+
 Dataset files are not committed. They live in `data/` (git-ignored) and are downloaded separately. Check each dataset's license on its own page before using it.
 
 **Attribution:** the base data is the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). It is used here for non-commercial learning only. This repository contains the import and seed code, not the data or a database built from it.

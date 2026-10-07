@@ -6,6 +6,24 @@ the package is. This is the data the read tools (`get_order`, `get_shipment`, `g
 
 ## Diagram
 
+<p align="center">
+  <img src="../assets/readme/data-model.svg" alt="Diagram of the six database tables and how they relate: a customer places many orders, an order contains many order items that each point at a product, an order is paid by many payments and shipped as at most one shipment." width="100%">
+</p>
+
+**Click a table to open its model:**
+
+<p align="center">
+  <a href="../app/models/customer.rb"><img src="../assets/readme/tables/customers.svg" alt="The customers table. Opens app/models/customer.rb" width="31%"></a>
+  <a href="../app/models/order.rb"><img src="../assets/readme/tables/orders.svg" alt="The orders table. Opens app/models/order.rb" width="31%"></a>
+  <a href="../app/models/order_item.rb"><img src="../assets/readme/tables/order_items.svg" alt="The order_items table. Opens app/models/order_item.rb" width="31%"></a>
+  <a href="../app/models/product.rb"><img src="../assets/readme/tables/products.svg" alt="The products table. Opens app/models/product.rb" width="31%"></a>
+  <a href="../app/models/payment.rb"><img src="../assets/readme/tables/payments.svg" alt="The payments table. Opens app/models/payment.rb" width="31%"></a>
+  <a href="../app/models/shipment.rb"><img src="../assets/readme/tables/shipments.svg" alt="The shipments table. Opens app/models/shipment.rb" width="31%"></a>
+</p>
+
+<details>
+<summary>Mermaid version (also shows unique keys and NOT NULL)</summary>
+
 ```mermaid
 erDiagram
     customers ||--o{ orders : "places"
@@ -77,7 +95,9 @@ erDiagram
     }
 ```
 
-`created_at` and `updated_at` exist on every table and are left out of the diagram to keep it readable.
+</details>
+
+`created_at` and `updated_at` exist on every table and are left out of both diagrams to keep them readable.
 
 <details>
 <summary>Text version</summary>
@@ -90,7 +110,7 @@ erDiagram
 
 </details>
 
-## How to read it
+## How to read the Mermaid version
 
 | Symbol | Meaning |
 | --- | --- |
