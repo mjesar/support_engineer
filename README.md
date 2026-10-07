@@ -109,9 +109,10 @@ Put the Olist files in `data/olist/` (see the Data section), then load them:
 ```bash
 LIMIT=200 bin/rails data:import_olist   # small sample: 200 customers and their orders, about half a minute
 bin/rails data:import_olist             # the full dataset
+bin/rails data:plant_scenarios          # shipments for every order, plus the planted scenarios
 ```
 
-Each step prints how many rows it loaded and how many it skipped. The scenario seed script is still to come in Lesson 1.
+Each import step prints how many rows it loaded and how many it skipped. `data:plant_scenarios` first generates the shipments, then edits five fixed orders (the first five that have a shipment) so each has a known answer for the evals. It prints the order id of each scenario, and running it again gives the same result.
 
 ## Scope
 

@@ -267,7 +267,7 @@ The project choice is locked. New project plans from other tools are not conside
 - [x] Note the column names of `orders`, `order_items`, `customers` and `products`
 - [x] Write the migrations for `Customer`, `Product`, `Order`, `OrderItem`, `Payment`, `Shipment`
 - [ ] Write the import task (`bin/rails data:import_olist`): written and tested on a sample, batching and a full run still to do
-- [ ] Write the scenario seed script with a fixed random seed
+- [x] Write the scenario seed script with a fixed random seed (`bin/rails data:plant_scenarios`)
 - [ ] Tag `lesson-01`
 
 Detailed progress, decisions and measured results: [lessons/01-data-model-and-import.md](lessons/01-data-model-and-import.md).
