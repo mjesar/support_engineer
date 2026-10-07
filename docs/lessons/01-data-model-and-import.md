@@ -17,7 +17,8 @@ Last updated: 2026-10-07
       closed, final sale item and duplicate charge
 - [x] Specs and factories for every model, and for the scenarios task
 - [x] README: how to run the import and the scenarios
-- [ ] Clean `db:reset` run from scratch, then tag `lesson-01`
+- [x] Clean `db:reset` run from scratch: import, scenarios and specs all pass
+- [ ] Tag `lesson-01` after the merge
 
 ## What was built
 
@@ -95,6 +96,7 @@ Measured on 2026-10-06 and 2026-10-07.
 | Import time, batches of 1,000 | about 3 minutes (customers 61 s, orders 70 s, items 21 s, payments 18 s) |
 | Shipments generated | 97,658 (orders that never reached a carrier have none) |
 | Specs | 20 examples, 0 failures; rubocop clean |
+| Clean run from scratch | `db:reset`, import (about 3 minutes), `plant_scenarios`, specs: same totals, scenarios on orders 1 to 5 |
 
 Known trade-offs: the import is not wrapped in a transaction (a crash leaves partial data, and rerunning
 clears and reloads everything), and it has no automated test of its own, only the totals above.
