@@ -28,14 +28,6 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
-      # TEMPORARY: shows the shape of the key without revealing it. Remove once the mirror works.
-      - name: Check key shape
-        run: |
-          wc -lc ~/.ssh/id_ed25519
-          head -1 ~/.ssh/id_ed25519
-          tail -1 ~/.ssh/id_ed25519
-          ssh-keygen -y -f ~/.ssh/id_ed25519 | cut -c1-40 || true
-
       # Detach first: git refuses to fetch into the branch that is checked out.
       # Copying every branch into refs/heads avoids pushing a stray "HEAD" branch to GitLab.
       - name: Push all branches and tags to GitLab
