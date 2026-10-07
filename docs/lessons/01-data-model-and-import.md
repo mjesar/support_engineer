@@ -18,7 +18,7 @@ Last updated: 2026-10-07
 - [x] Specs and factories for every model, and for the scenarios task
 - [x] README: how to run the import and the scenarios
 - [x] Clean `db:reset` run from scratch: import, scenarios and specs all pass
-- [ ] Tag `lesson-01` after the merge
+- [x] Tag `lesson-01` on the merge commit of the lesson 1 pull request
 
 ## What was built
 
