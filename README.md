@@ -28,6 +28,13 @@ This project builds that system, and measures whether it gets it right.
 
 An agent that reasons and uses tools instead of answering from memory:
 
+<p align="center">
+  <img src="assets/readme/agent-loop.svg" alt="Diagram of the seven steps the agent takes for one support case: route, act, retrieve, decide, approve, execute and answer. The first four steps only read data. Approve and execute need a human to say yes. If the agent lacks facts it loops from decide back to act." width="100%">
+</p>
+
+<details>
+<summary>Text version of the diagram</summary>
+
 1. **Route:** decide what the message needs (order data, policy, or both).
 2. **Act:** call read tools such as `get_order` and `get_shipment`.
 3. **Retrieve:** search policy documents (RAG) for the relevant rule.
@@ -35,6 +42,10 @@ An agent that reasons and uses tools instead of answering from memory:
 5. **Ask for approval:** a support person sees the proposed action with the evidence.
 6. **Execute and audit:** the action runs and is written to an audit log.
 7. **Answer:** the customer gets a reply that cites the order status and the policy section.
+
+Steps 1 to 4 only read data, and if the agent does not have enough facts after deciding, it goes back to step 2 and calls more tools. Steps 5 and 6 change something, so a human has to say yes first.
+
+</details>
 
 Every step is traced, and each scenario is also an eval case with a known correct answer.
 
