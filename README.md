@@ -2,7 +2,7 @@
 
 A support agent that investigates customer problems, searches company policies, checks real order data, and takes safe actions only with human approval.
 
-> **Status:** early development (Lesson 1 of 14). This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
+> **Status:** Lesson 1 of 14 is done: a normal Rails app with real and planted data, and no AI yet. Lesson 2 (the first LLM call) is next. This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
 
 ## The problem
 
@@ -58,7 +58,7 @@ Gems are added in the lesson that needs them, not all at once. All LLM calls wil
 Three milestones, 14 lessons. Each lesson changes the same application and gets a Git tag (`lesson-01`, `lesson-02`, ...).
 
 **Milestone 1: a working support agent**
-1. A normal Rails app with real and planted data (no AI yet) **(in progress)**
+1. A normal Rails app with real and planted data (no AI yet) **(done)**
 2. First LLM call and structured output
 3. Tool calling with read tools
 4. The agent loop, written by hand
@@ -124,3 +124,4 @@ This is a learning project about building a reliable AI agent, not a complete su
 - The database tables and how they relate, as a diagram: [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
 - Lesson progress, decisions and what broke: [docs/lessons/01-data-model-and-import.md](docs/lessons/01-data-model-and-import.md)
 - Index of all documentation: [docs/README.md](docs/README.md)
+- Where the code lives: this GitHub repo is the source of truth, and pull requests and issues are here. A read-only mirror is kept on [GitLab](https://gitlab.com/mjesar/support_engineer).
