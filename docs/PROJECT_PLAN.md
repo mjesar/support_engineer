@@ -255,7 +255,7 @@ The project choice is locked. New project plans from other tools are not conside
 - [ ] Olist as the base data, or fully generated data only
 - [ ] Licenses of the Twitter support dataset checked (Olist done: CC BY-NC-SA 4.0; Bitext done: CDLA-Sharing-1.0, text at https://cdla.dev/sharing-1-0/, use and results are unrestricted, publishing the data itself requires the same license and credit)
 - [ ] Groq free-tier limits checked in the Groq console
-- [ ] RubyLLM support for Groq confirmed (native or OpenAI-compatible base URL)
+- [x] RubyLLM support for Groq confirmed (2026-10-08): no native provider, use the OpenAI-compatible route (`openai_api_base` set to Groq's OpenAI endpoint, `provider: :openai`, `assume_model_exists: true`, per the RubyLLM docs). Whether a given Groq model supports structured output is tested in the console in lesson 2
 - [ ] RubyLLM support for Ollama embeddings confirmed
 - [ ] Blog platform chosen (DEV.to suggested)
 
