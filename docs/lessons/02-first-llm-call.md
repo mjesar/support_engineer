@@ -58,6 +58,9 @@ reply = SupportAgent.new.chat.with_schema(Triage).ask("Where is my package? It w
 reply.parsed  # => {"intent" => "order_status", "summary" => "User is inquiring about ..."}
 ```
 
+`reply.parsed` only works on a reply that came from a schema. On a plain reply it raises
+`JSON::ParserError`, because it tries to read the text as JSON.
+
 The reply is a hash that matches the schema, so the router in a later lesson can rely on a clean intent
 instead of parsing free text. This was one question, not a measured result: how often the model picks the
 right intent is a job for evals.
