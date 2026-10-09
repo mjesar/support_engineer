@@ -1,7 +1,7 @@
 class SupportChat
-  # Groq speaks only the Chat Completions protocol, and its models are not in
-  # RubyLLM's registry, so every chat needs these three options.
+  # Groq's models are not in RubyLLM's registry, so every chat needs
+  # assume_model_exists. The Chat Completions protocol is set in the Groq initializer.
   def self.build
-    RubyLLM.chat(provider: :openai, protocol: :chat_completions, assume_model_exists: true)
+    RubyLLM.chat(provider: :openai, assume_model_exists: true)
   end
 end
