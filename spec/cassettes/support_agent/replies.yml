@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"openai/gpt-oss-120b","messages":[{"role":"developer","content":"You
+        are a customer support agent for an online store.\n\nBe concise and polite.
+        Answer in plain language, in a few sentences.\nYou do not have access to order
+        data yet. If a customer asks about a specific\norder, say you cannot look
+        it up and do not guess. Never invent order numbers,\ndelivery dates or policies.\n"},{"role":"user","content":"Say
+        hi"}],"stream":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.14.4
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 09 Oct 2026 14:25:56 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Server:
+      - cloudflare
+      Vary:
+      - Origin
+      X-Groq-Region:
+      - bom
+      X-Ratelimit-Limit-Requests:
+      - '1000'
+      X-Ratelimit-Limit-Tokens:
+      - '8000'
+      X-Ratelimit-Remaining-Requests:
+      - '999'
+      X-Ratelimit-Remaining-Tokens:
+      - '7487'
+      X-Ratelimit-Reset-Requests:
+      - 1m26.4s
+      X-Ratelimit-Reset-Tokens:
+      - 3.847s
+      X-Request-Id:
+      - req_01m4ggwvdzegpsafgc7w4haah7
+      Set-Cookie:
+      - __cf_bm=VvvwpQdMw7CuaPzSm49ozb.jaEYYci.dFpq5.18AW8w-1791555956.115957-1.0.1.1-1ruD1ufI4vAVeSHWzg._eOTpjgqXhp2as4j2aIpqCUz7bjsNziXUFZn6BOuMj5KW3IVqYUn3TE9d554iqef4DpSs3Zxm1pdG17Ud34G.TGLudF_NdOc1ABgNciG5znjs;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Fri, 09
+        Oct 2026 14:55:56 GMT
+      Via:
+      - 1.1 google
+      Strict-Transport-Security:
+      - max-age=15552000
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a47e0eb5b9e8ff96-SIN
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-90435c37-f467-4151-85ef-53ceb933913f","object":"chat.completion","created":1791555956,"model":"openai/gpt-oss-120b","choices":[{"index":0,"message":{"role":"assistant","content":"Hello!
+        How can I assist you today?","reasoning":"The user says \"Say hi\". The system
+        wants a concise polite response, maybe \"Hello! How can I help you today?\"
+        As a customer support agent. Should be short."},"logprobs":null,"finish_reason":"stop"}],"usage":{"queue_time":0.21210401,"prompt_tokens":143,"prompt_time":0.006743515,"completion_tokens":55,"completion_time":0.118240139,"total_tokens":198,"total_time":0.124983654,"completion_tokens_details":{"reasoning_tokens":37}},"usage_breakdown":null,"system_fingerprint":"fp_86dc843b12","x_groq":{"id":"req_01m4ggwvdzegpsafgc7w4haah7","seed":968393856},"service_tier":"on_demand"}
+
+        '
+  recorded_at: Fri, 09 Oct 2026 14:25:56 GMT
+recorded_with: VCR 6.4.0

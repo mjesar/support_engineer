@@ -190,5 +190,6 @@ This is a learning project about building a reliable AI agent, not a complete su
 - The full plan, with architecture, gems by lesson, data mapping and the evaluation plan: [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md)
 - The database tables and how they relate, as a diagram: [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
 - Lesson progress, decisions and what broke: [docs/lessons/01-data-model-and-import.md](docs/lessons/01-data-model-and-import.md)
+- Lesson 2, the first LLM call: [docs/lessons/02-first-llm-call.md](docs/lessons/02-first-llm-call.md)
 - Index of all documentation: [docs/README.md](docs/README.md)
 - Where the code lives: this GitHub repo is the source of truth, and pull requests and issues are here. A read-only mirror is kept on [GitLab](https://gitlab.com/mjesar/support_engineer).

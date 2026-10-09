@@ -254,8 +254,8 @@ The project choice is locked. New project plans from other tools are not conside
 - [ ] Solid Queue + Solid Cache, or Sidekiq + Redis
 - [ ] Olist as the base data, or fully generated data only
 - [ ] Licenses of the Twitter support dataset checked (Olist done: CC BY-NC-SA 4.0; Bitext done: CDLA-Sharing-1.0, text at https://cdla.dev/sharing-1-0/, use and results are unrestricted, publishing the data itself requires the same license and credit)
-- [ ] Groq free-tier limits checked in the Groq console
-- [ ] RubyLLM support for Groq confirmed (native or OpenAI-compatible base URL)
+- [x] Groq free-tier limits checked (2026-10-09, read from the response headers for `openai/gpt-oss-120b`, not from the console): 1000 requests (the reset time suggests per day) and 8000 tokens per minute. The token limit is the tight one: long prompts, tool results and RAG context in later lessons will hit it, and so will eval runs with many cases
+- [x] RubyLLM support for Groq confirmed (2026-10-08): no native provider, use the OpenAI-compatible route (`openai_api_base` set to Groq's OpenAI endpoint, `provider: :openai`, `assume_model_exists: true`, per the RubyLLM docs). Verified in the console on 2026-10-09 with ruby_llm 2.1.0: also set `config.openai_protocol = :chat_completions`, because 2.x defaults OpenAI to the Responses API and Groq rejects its `include` field. `llama-3.3-70b-versatile` is gone from Groq; `openai/gpt-oss-120b` answers. Structured output verified in the console on 2026-10-09: `openai/gpt-oss-120b` returns a hash that matches a Schematist schema through `chat.with_schema(...)` and `reply.parsed`
 - [ ] RubyLLM support for Ollama embeddings confirmed
 - [ ] Blog platform chosen (DEV.to suggested)
 
