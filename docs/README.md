@@ -8,6 +8,7 @@ lesson pages in order.
 | [PROJECT_PLAN.md](PROJECT_PLAN.md) | The whole project: scenario, architecture, stack, tools and permissions, 14 lessons, evaluation plan. |
 | [DATA_MODEL.md](DATA_MODEL.md) | The database as a diagram, why each table looks the way it does, and where its data comes from. |
 | [lessons/01-data-model-and-import.md](lessons/01-data-model-and-import.md) | Lesson 1: progress checklist, decisions, what broke and measured results. |
+| [lessons/02-first-llm-call.md](lessons/02-first-llm-call.md) | Lesson 2: Groq through RubyLLM 2.x, the agent and its prompt, testing with recorded calls. |
 
 ## Conventions
 
