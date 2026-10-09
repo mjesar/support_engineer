@@ -13,7 +13,7 @@ Last updated: 2026-10-09
 - [x] VCR and WebMock set up, with the Groq key filtered out of recordings
 - [x] First agent spec with a recorded cassette
 - [x] Structured output tested in the console on the chosen Groq model
-- [ ] Tag `lesson-02` on the merge commit of the lesson 2 pull request
+- [x] Tag `lesson-02` on the merge commit of the lesson 2 pull request
 
 ## What was built
 

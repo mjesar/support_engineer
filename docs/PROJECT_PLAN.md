@@ -259,15 +259,8 @@ The project choice is locked. New project plans from other tools are not conside
 - [ ] RubyLLM support for Ollama embeddings confirmed
 - [ ] Blog platform chosen (DEV.to suggested)
 
-## 12. Current step: Lesson 1 checklist
+## 12. Current step: Lesson 3
 
-- [x] Create the app: `rails new <name> --database=postgresql --css=tailwind`
-- [x] Add `data/` to `.gitignore`
-- [x] Download the Olist dataset into `data/olist/` and check its license
-- [x] Note the column names of `orders`, `order_items`, `customers` and `products`
-- [x] Write the migrations for `Customer`, `Product`, `Order`, `OrderItem`, `Payment`, `Shipment`
-- [ ] Write the import task (`bin/rails data:import_olist`): written and tested on a sample, batching and a full run still to do
-- [x] Write the scenario seed script with a fixed random seed (`bin/rails data:plant_scenarios`)
-- [ ] Tag `lesson-01`
-
-Detailed progress, decisions and measured results: [lessons/01-data-model-and-import.md](lessons/01-data-model-and-import.md).
+- [x] Lesson 1: a normal Rails app with real and planted data, tagged `lesson-01`. Details: [lessons/01-data-model-and-import.md](lessons/01-data-model-and-import.md)
+- [x] Lesson 2: the first LLM call and structured output, tagged `lesson-02`. Details: [lessons/02-first-llm-call.md](lessons/02-first-llm-call.md)
+- [ ] Lesson 3: tool calling with read tools. The checklist is written when the lesson starts.
