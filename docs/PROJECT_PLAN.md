@@ -263,4 +263,12 @@ The project choice is locked. New project plans from other tools are not conside
 
 - [x] Lesson 1: a normal Rails app with real and planted data, tagged `lesson-01`. Details: [lessons/01-data-model-and-import.md](lessons/01-data-model-and-import.md)
 - [x] Lesson 2: the first LLM call and structured output, tagged `lesson-02`. Details: [lessons/02-first-llm-call.md](lessons/02-first-llm-call.md)
-- [ ] Lesson 3: tool calling with read tools. The checklist is written when the lesson starts.
+- [ ] Lesson 3: tool calling with read tools (branch `lesson-03-read-tools`)
+  - [ ] Check the RubyLLM 2.x tool docs and gem source before writing any tool code
+  - [ ] Decide the tool shape: plain Ruby class per tool in `app/tools/`, same method names and error style for all
+  - [ ] `GetOrder`: finds an order by id and returns only the fields the task needs (plain Ruby, tested without the LLM)
+  - [ ] `GetShipment`, `GetCustomer`, `SearchOrders`: same shape as `GetOrder`
+  - [ ] Wrap the plain tools for RubyLLM and give `SupportAgent` an allowlist of read tools
+  - [ ] Console proof: the model picks `get_order` for "where is my order #1042?" and answers from the result
+  - [ ] Specs: each tool alone, plus one recorded cassette of a tool-calling run
+  - [ ] Write `lessons/03-read-tools.md` (concept, what broke, proof), tag `lesson-03`
