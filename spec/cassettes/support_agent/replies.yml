@@ -7,10 +7,28 @@ http_interactions:
       encoding: UTF-8
       string: '{"model":"openai/gpt-oss-120b","messages":[{"role":"developer","content":"You
         are a customer support agent for an online store.\n\nBe concise and polite.
-        Answer in plain language, in a few sentences.\nYou do not have access to order
-        data yet. If a customer asks about a specific\norder, say you cannot look
-        it up and do not guess. Never invent order numbers,\ndelivery dates or policies.\n"},{"role":"user","content":"Say
-        hi"}],"stream":false}'
+        Answer in plain language, in a few sentences.\nWhen a customer asks about
+        a specific order, look it up with your tools before\nanswering. Base every
+        answer on what the tools return. If a tool returns an\nerror or no data, say
+        so and do not guess. Never invent order numbers,\ndelivery dates or policies.\n"},{"role":"user","content":"Say
+        hi"}],"stream":false,"tools":[{"type":"function","function":{"name":"get_order","description":"Looks
+        up one order by its id. Returns its status, purchase, shipping and delivery
+        dates, and the items with name, category, price and whether they are final
+        sale.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"get_shipment","description":"Looks
+        up where the package of an order is. Takes the order id, not a shipment id.
+        Returns the shipment status, carrier, tracking number, last known location
+        and last scan time. Returns an error if the order has not shipped yet.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"get_customer","description":"Looks
+        up a customer by id. Returns their name, city and state. It does not return
+        contact details or orders; use search_orders to list a customer''s orders.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"}},"required":["customer_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"search_orders","description":"Lists
+        a customer''s most recent orders, newest first, up to 10, with the real total
+        count. Each entry has the order id, status and dates. Use it when the customer
+        does not know their order id, then call get_order for the details of one order.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"},"status":{"type":"string","description":"Only
+        orders with this status: created, approved, invoiced, processing, shipped,
+        delivered, canceled or unavailable"}},"required":["customer_id"],"additionalProperties":false,"strict":true}}}],"include_reasoning":false}'
     headers:
       User-Agent:
       - Faraday v2.14.4
@@ -28,7 +46,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 09 Oct 2026 14:25:56 GMT
+      - Sat, 10 Oct 2026 12:11:20 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -48,19 +66,19 @@ http_interactions:
       X-Ratelimit-Limit-Tokens:
       - '8000'
       X-Ratelimit-Remaining-Requests:
-      - '999'
+      - '995'
       X-Ratelimit-Remaining-Tokens:
-      - '7487'
+      - '6409'
       X-Ratelimit-Reset-Requests:
-      - 1m26.4s
+      - 7m12s
       X-Ratelimit-Reset-Tokens:
-      - 3.847s
+      - 11.932s
       X-Request-Id:
-      - req_01m4ggwvdzegpsafgc7w4haah7
+      - req_01m4jvk3x1e41tj4e6x2n8a58j
       Set-Cookie:
-      - __cf_bm=VvvwpQdMw7CuaPzSm49ozb.jaEYYci.dFpq5.18AW8w-1791555956.115957-1.0.1.1-1ruD1ufI4vAVeSHWzg._eOTpjgqXhp2as4j2aIpqCUz7bjsNziXUFZn6BOuMj5KW3IVqYUn3TE9d554iqef4DpSs3Zxm1pdG17Ud34G.TGLudF_NdOc1ABgNciG5znjs;
-        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Fri, 09
-        Oct 2026 14:55:56 GMT
+      - __cf_bm=cKDlFsoSu1bbkpVcnV.kkesCRIKIdGmo349jULlzwGg-1791634280.3150678-1.0.1.1-Z1Jp8kvEhjlLqE._GNmUdZLMt4cLNjfC3kV9Yf7765WiWI3yOVzy.TzCf_dJsspHAymD.qEYqf1rJe9Q2IqjtipoxGVkvCVT4sjCkTD7yT7YhVFTGu8q2Sg_f3vtikiX;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Sat, 10
+        Oct 2026 12:41:20 GMT
       Via:
       - 1.1 google
       Strict-Transport-Security:
@@ -68,16 +86,14 @@ http_interactions:
       Cf-Cache-Status:
       - DYNAMIC
       Cf-Ray:
-      - a47e0eb5b9e8ff96-SIN
+      - a48586ebfe93fd9b-SIN
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
-      string: '{"id":"chatcmpl-90435c37-f467-4151-85ef-53ceb933913f","object":"chat.completion","created":1791555956,"model":"openai/gpt-oss-120b","choices":[{"index":0,"message":{"role":"assistant","content":"Hello!
-        How can I assist you today?","reasoning":"The user says \"Say hi\". The system
-        wants a concise polite response, maybe \"Hello! How can I help you today?\"
-        As a customer support agent. Should be short."},"logprobs":null,"finish_reason":"stop"}],"usage":{"queue_time":0.21210401,"prompt_tokens":143,"prompt_time":0.006743515,"completion_tokens":55,"completion_time":0.118240139,"total_tokens":198,"total_time":0.124983654,"completion_tokens_details":{"reasoning_tokens":37}},"usage_breakdown":null,"system_fingerprint":"fp_86dc843b12","x_groq":{"id":"req_01m4ggwvdzegpsafgc7w4haah7","seed":968393856},"service_tier":"on_demand"}
+      string: '{"id":"chatcmpl-76e8d576-518d-4d7e-84a4-06c19c0b19ab","object":"chat.completion","created":1791634280,"model":"openai/gpt-oss-120b","choices":[{"index":0,"message":{"role":"assistant","content":"Hello!
+        How can I help you today?"},"logprobs":null,"finish_reason":"stop"}],"usage":{"queue_time":0.212930092,"prompt_tokens":1032,"prompt_time":0.000307074,"completion_tokens":29,"completion_time":0.061247206,"total_tokens":1061,"total_time":0.06155428,"prompt_tokens_details":{"cached_tokens":512},"completion_tokens_details":{"reasoning_tokens":11}},"usage_breakdown":null,"system_fingerprint":"fp_c3da0d4bb9","x_groq":{"id":"req_01m4jvk3x1e41tj4e6x2n8a58j","seed":1146155698},"service_tier":"on_demand"}
 
         '
-  recorded_at: Fri, 09 Oct 2026 14:25:56 GMT
+  recorded_at: Sat, 10 Oct 2026 12:11:20 GMT
 recorded_with: VCR 6.4.0

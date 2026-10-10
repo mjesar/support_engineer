@@ -1,0 +1,288 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"openai/gpt-oss-120b","messages":[{"role":"developer","content":"You
+        are a customer support agent for an online store.\n\nBe concise and polite.
+        Answer in plain language, in a few sentences.\nWhen a customer asks about
+        a specific order, look it up with your tools before\nanswering. Base every
+        answer on what the tools return. If a tool returns an\nerror or no data, say
+        so and do not guess. Never invent order numbers,\ndelivery dates or policies.\n"},{"role":"user","content":"Where
+        is my order 4242?"}],"stream":false,"tools":[{"type":"function","function":{"name":"get_order","description":"Looks
+        up one order by its id. Returns its status, purchase, shipping and delivery
+        dates, and the items with name, category, price and whether they are final
+        sale.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"get_shipment","description":"Looks
+        up where the package of an order is. Takes the order id, not a shipment id.
+        Returns the shipment status, carrier, tracking number, last known location
+        and last scan time. Returns an error if the order has not shipped yet.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"get_customer","description":"Looks
+        up a customer by id. Returns their name, city and state. It does not return
+        contact details or orders; use search_orders to list a customer''s orders.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"}},"required":["customer_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"search_orders","description":"Lists
+        a customer''s most recent orders, newest first, up to 10, with the real total
+        count. Each entry has the order id, status and dates. Use it when the customer
+        does not know their order id, then call get_order for the details of one order.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"},"status":{"type":"string","description":"Only
+        orders with this status: created, approved, invoiced, processing, shipped,
+        delivered, canceled or unavailable"}},"required":["customer_id"],"additionalProperties":false,"strict":true}}}],"include_reasoning":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.14.4
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 10 Oct 2026 12:15:54 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Server:
+      - cloudflare
+      Vary:
+      - Origin
+      X-Groq-Region:
+      - dmm
+      X-Ratelimit-Limit-Requests:
+      - '1000'
+      X-Ratelimit-Limit-Tokens:
+      - '8000'
+      X-Ratelimit-Remaining-Requests:
+      - '997'
+      X-Ratelimit-Remaining-Tokens:
+      - '7356'
+      X-Ratelimit-Reset-Requests:
+      - 4m19.2s
+      X-Ratelimit-Reset-Tokens:
+      - 4.83s
+      X-Request-Id:
+      - req_01m4jvverme3tvmaeb8zz6ce74
+      Via:
+      - 1.1 google
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=sG1_rbj2XQOIxv7kd2Ks2gft6v7ECVhWP9VV3Aa4.uY-1791634553.6084955-1.0.1.1-ARTyDhlHF2PFtjFj096cZ98cn3AEWUx3.bYHWoJ6CeGlGcOn9aXEh86faHRmm_eRu_8fBBa20YdXV4IrjEcdYxOeLHYbRptEm9VNGxnHbbxrP9f5hvoeDieChYTiR6cW;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Sat, 10
+        Oct 2026 12:45:54 GMT
+      Strict-Transport-Security:
+      - max-age=15552000
+      Cf-Ray:
+      - a4858d980abdb7f7-KHI
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-1e77bea9-a6a7-4274-b5f8-8caedaca6f1e","object":"chat.completion","created":1791634554,"model":"openai/gpt-oss-120b","choices":[{"index":0,"message":{"role":"assistant","tool_calls":[{"id":"fc_83b223a6-34e7-4540-b743-a5dcbf850c1e","type":"function","function":{"name":"get_order","arguments":"{\"order_id\":4242}"}}]},"logprobs":null,"finish_reason":"tool_calls"}],"usage":{"queue_time":0.541547098,"prompt_tokens":526,"prompt_time":0.104665899,"completion_tokens":52,"completion_time":0.112214401,"total_tokens":578,"total_time":0.2168803,"completion_tokens_details":{"reasoning_tokens":23}},"usage_breakdown":null,"system_fingerprint":"fp_4200b3f836","x_groq":{"id":"req_01m4jvverme3tvmaeb8zz6ce74","seed":1344105193},"service_tier":"on_demand"}
+
+        '
+  recorded_at: Sat, 10 Oct 2026 12:15:54 GMT
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"openai/gpt-oss-120b","messages":[{"role":"developer","content":"You
+        are a customer support agent for an online store.\n\nBe concise and polite.
+        Answer in plain language, in a few sentences.\nWhen a customer asks about
+        a specific order, look it up with your tools before\nanswering. Base every
+        answer on what the tools return. If a tool returns an\nerror or no data, say
+        so and do not guess. Never invent order numbers,\ndelivery dates or policies.\n"},{"role":"user","content":"Where
+        is my order 4242?"},{"role":"assistant","content":"","tool_calls":[{"id":"fc_83b223a6-34e7-4540-b743-a5dcbf850c1e","type":"function","function":{"name":"get_order","arguments":"{\"order_id\":4242}"}}]},{"role":"tool","content":"{\"id\":4242,\"status\":\"shipped\",\"purchased_at\":\"2026-09-20T00:00:00.000Z\",\"shipped_at\":\"2026-09-24T00:00:00.000Z\",\"delivered_at\":null,\"estimated_delivery_at\":\"2026-10-01T00:00:00.000Z\",\"items\":[]}","tool_call_id":"fc_83b223a6-34e7-4540-b743-a5dcbf850c1e"}],"stream":false,"tools":[{"type":"function","function":{"name":"get_order","description":"Looks
+        up one order by its id. Returns its status, purchase, shipping and delivery
+        dates, and the items with name, category, price and whether they are final
+        sale.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"get_shipment","description":"Looks
+        up where the package of an order is. Takes the order id, not a shipment id.
+        Returns the shipment status, carrier, tracking number, last known location
+        and last scan time. Returns an error if the order has not shipped yet.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"get_customer","description":"Looks
+        up a customer by id. Returns their name, city and state. It does not return
+        contact details or orders; use search_orders to list a customer''s orders.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"}},"required":["customer_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"search_orders","description":"Lists
+        a customer''s most recent orders, newest first, up to 10, with the real total
+        count. Each entry has the order id, status and dates. Use it when the customer
+        does not know their order id, then call get_order for the details of one order.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"},"status":{"type":"string","description":"Only
+        orders with this status: created, approved, invoiced, processing, shipped,
+        delivered, canceled or unavailable"}},"required":["customer_id"],"additionalProperties":false,"strict":true}}}],"include_reasoning":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.14.4
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 10 Oct 2026 12:15:55 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Server:
+      - cloudflare
+      Vary:
+      - Origin
+      X-Groq-Region:
+      - dmm
+      X-Ratelimit-Limit-Requests:
+      - '1000'
+      X-Ratelimit-Limit-Tokens:
+      - '8000'
+      X-Ratelimit-Remaining-Requests:
+      - '996'
+      X-Ratelimit-Remaining-Tokens:
+      - '6792'
+      X-Ratelimit-Reset-Requests:
+      - 5m45.6s
+      X-Ratelimit-Reset-Tokens:
+      - 9.06s
+      X-Request-Id:
+      - req_01m4jvvfn2e1hrv7yngnhx5936
+      Via:
+      - 1.1 google
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=c9lMyXhrSy4a7LO0.nGYShiyGltbkOW8XMTxKkbBsCk-1791634554.5188797-1.0.1.1-mDtgOojECtBZXkqVPQ0OuL4cRJY_1SFeir6c.NciHMXcEd7HBcOSBijv_arAUTM.u5ET5y4ksw4N0gp11oJ1g1YvWLvVros9Ybo9vFWKo9hkRjukHIv8qInCU8KcThPg;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Sat, 10
+        Oct 2026 12:45:55 GMT
+      Strict-Transport-Security:
+      - max-age=15552000
+      Cf-Ray:
+      - a4858d9dbb3fb7f7-KHI
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-3befea28-a348-44a6-a01e-70ddd92a102d","object":"chat.completion","created":1791634555,"model":"openai/gpt-oss-120b","choices":[{"index":0,"message":{"role":"assistant","tool_calls":[{"id":"fc_755bcab0-c4e7-4775-af83-c5c98b4be743","type":"function","function":{"name":"get_shipment","arguments":"{\"order_id\":4242}"}}]},"logprobs":null,"finish_reason":"tool_calls"}],"usage":{"queue_time":0.301206487,"prompt_tokens":632,"prompt_time":0.032221648,"completion_tokens":52,"completion_time":0.107963703,"total_tokens":684,"total_time":0.140185351,"prompt_tokens_details":{"cached_tokens":512},"completion_tokens_details":{"reasoning_tokens":31}},"usage_breakdown":null,"system_fingerprint":"fp_4200b3f836","x_groq":{"id":"req_01m4jvvfn2e1hrv7yngnhx5936","seed":614627496},"service_tier":"on_demand"}
+
+        '
+  recorded_at: Sat, 10 Oct 2026 12:15:55 GMT
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"openai/gpt-oss-120b","messages":[{"role":"developer","content":"You
+        are a customer support agent for an online store.\n\nBe concise and polite.
+        Answer in plain language, in a few sentences.\nWhen a customer asks about
+        a specific order, look it up with your tools before\nanswering. Base every
+        answer on what the tools return. If a tool returns an\nerror or no data, say
+        so and do not guess. Never invent order numbers,\ndelivery dates or policies.\n"},{"role":"user","content":"Where
+        is my order 4242?"},{"role":"assistant","content":"","tool_calls":[{"id":"fc_83b223a6-34e7-4540-b743-a5dcbf850c1e","type":"function","function":{"name":"get_order","arguments":"{\"order_id\":4242}"}}]},{"role":"tool","content":"{\"id\":4242,\"status\":\"shipped\",\"purchased_at\":\"2026-09-20T00:00:00.000Z\",\"shipped_at\":\"2026-09-24T00:00:00.000Z\",\"delivered_at\":null,\"estimated_delivery_at\":\"2026-10-01T00:00:00.000Z\",\"items\":[]}","tool_call_id":"fc_83b223a6-34e7-4540-b743-a5dcbf850c1e"},{"role":"assistant","content":"","tool_calls":[{"id":"fc_755bcab0-c4e7-4775-af83-c5c98b4be743","type":"function","function":{"name":"get_shipment","arguments":"{\"order_id\":4242}"}}]},{"role":"tool","content":"{\"error\":\"Order
+        4242 has no shipment\"}","tool_call_id":"fc_755bcab0-c4e7-4775-af83-c5c98b4be743"}],"stream":false,"tools":[{"type":"function","function":{"name":"get_order","description":"Looks
+        up one order by its id. Returns its status, purchase, shipping and delivery
+        dates, and the items with name, category, price and whether they are final
+        sale.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"get_shipment","description":"Looks
+        up where the package of an order is. Takes the order id, not a shipment id.
+        Returns the shipment status, carrier, tracking number, last known location
+        and last scan time. Returns an error if the order has not shipped yet.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"get_customer","description":"Looks
+        up a customer by id. Returns their name, city and state. It does not return
+        contact details or orders; use search_orders to list a customer''s orders.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"}},"required":["customer_id"],"additionalProperties":false,"strict":true}}},{"type":"function","function":{"name":"search_orders","description":"Lists
+        a customer''s most recent orders, newest first, up to 10, with the real total
+        count. Each entry has the order id, status and dates. Use it when the customer
+        does not know their order id, then call get_order for the details of one order.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"},"status":{"type":"string","description":"Only
+        orders with this status: created, approved, invoiced, processing, shipped,
+        delivered, canceled or unavailable"}},"required":["customer_id"],"additionalProperties":false,"strict":true}}}],"include_reasoning":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.14.4
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 10 Oct 2026 12:15:56 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Server:
+      - cloudflare
+      Vary:
+      - Origin
+      X-Groq-Region:
+      - bom
+      X-Ratelimit-Limit-Requests:
+      - '1000'
+      X-Ratelimit-Limit-Tokens:
+      - '8000'
+      X-Ratelimit-Remaining-Requests:
+      - '995'
+      X-Ratelimit-Remaining-Tokens:
+      - '6845'
+      X-Ratelimit-Reset-Requests:
+      - 7m12s
+      X-Ratelimit-Reset-Tokens:
+      - 8.662s
+      X-Request-Id:
+      - req_01m4jvvh60ez5arb8kcfxss49r
+      Set-Cookie:
+      - __cf_bm=j7avQ8A8j69qR8I92KV_W3T9HNRJtSXK4QsOlW3j1T0-1791634556.0567179-1.0.1.1-yNTAd8p3DhRC5UDNoLgfTmhwgn2OrioOsF8pdgLiSYi_9Cazn88nkh_bTRM.7dvgam.yhCV0XxmCrxSMwOWq5AIOP2w3D7bSeWOWA9gOJfd4ltgrtib_yoC98xqKu5Yo;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Sat, 10
+        Oct 2026 12:45:56 GMT
+      Via:
+      - 1.1 google
+      Strict-Transport-Security:
+      - max-age=15552000
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a4858da75bcffd21-SIN
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6ImNoYXRjbXBsLTg2ZGU0MDM3LWQ1ODItNDA0Mi04ZDcwLWZhMDc4ZWNiYWEwNiIsIm9iamVjdCI6ImNoYXQuY29tcGxldGlvbiIsImNyZWF0ZWQiOjE3OTE2MzQ1NTYsIm1vZGVsIjoib3BlbmFpL2dwdC1vc3MtMTIwYiIsImNob2ljZXMiOlt7ImluZGV4IjowLCJtZXNzYWdlIjp7InJvbGUiOiJhc3Npc3RhbnQiLCJjb250ZW50IjoiWW91ciBvcmRlcuKAryM0MjQyIGlzIGN1cnJlbnRseSAqKnNoaXBwZWQqKi4gVGhlIGVzdGltYXRlZCBkZWxpdmVyeSBkYXRlIGlzICoqT2N0b2JlcuKArzEs4oCvMjAyNioqLiBBdCB0aGlzIHRpbWUgd2UgZG9u4oCZdCBoYXZlIHNoaXBtZW50IHRyYWNraW5nIGRldGFpbHMgYXZhaWxhYmxlLiBJZiB5b3UgbmVlZCBmdXJ0aGVyIGFzc2lzdGFuY2UsIHBsZWFzZSBsZXQgdXMga25vdy4ifSwibG9ncHJvYnMiOm51bGwsImZpbmlzaF9yZWFzb24iOiJzdG9wIn1dLCJ1c2FnZSI6eyJxdWV1ZV90aW1lIjowLjMwNzI5NTE4NCwicHJvbXB0X3Rva2VucyI6NjcxLCJwcm9tcHRfdGltZSI6MC4wMzYzNjExOCwiY29tcGxldGlvbl90b2tlbnMiOjEzMCwiY29tcGxldGlvbl90aW1lIjowLjI3NDM2Mjg0MSwidG90YWxfdG9rZW5zIjo4MDEsInRvdGFsX3RpbWUiOjAuMzEwNzI0MDIxLCJjb21wbGV0aW9uX3Rva2Vuc19kZXRhaWxzIjp7InJlYXNvbmluZ190b2tlbnMiOjcwfX0sInVzYWdlX2JyZWFrZG93biI6bnVsbCwic3lzdGVtX2ZpbmdlcnByaW50IjoiZnBfNDliZmFjMDZmMSIsInhfZ3JvcSI6eyJpZCI6InJlcV8wMW00anZ2aDYwZXo1YXJiOGtjZnhzczQ5ciIsInNlZWQiOjE2NDkwNjcwMzV9LCJzZXJ2aWNlX3RpZXIiOiJvbl9kZW1hbmQifQo=
+  recorded_at: Sat, 10 Oct 2026 12:15:56 GMT
+recorded_with: VCR 6.4.0
