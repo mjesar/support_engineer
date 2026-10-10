@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">How data reaches the support agent</title>
+  <desc id="desc">Data flows left to right through five layers. Olist CSV files are imported once into PostgreSQL tables. Models read those tables. Services such as GetOrder pick the fields the model may see and return a plain Hash. Tools such as GetOrderTool describe a service to RubyLLM. The support agent and its language model choose which tool to call and write the answer. A customer question travels the other way: the model picks a tool, the tool calls a service, the service queries the models and the database.</desc>
+  <rect width="1200" height="640" rx="16" fill="#0f172a"/>
+  <text x="40" y="48" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" fill="#e2e8f0">How data reaches the support agent</text>
+  <text x="40" y="76" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#94a3b8">Data flows left to right. A customer question travels the other way (bottom of the page).</text>
+
+  <!-- 1 Olist -->
+  <rect x="40" y="130" width="190" height="200" rx="12" fill="#162036" stroke="#64748b" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="135" y="164" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#e2e8f0">Olist CSVs</text>
+  <text x="135" y="186" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#94a3b8">data/olist/</text>
+  <line x1="60" y1="200" x2="210" y2="200" stroke="#64748b" stroke-width="1"/>
+  <text x="135" y="228" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Real orders, customers,</text>
+  <text x="135" y="250" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">payments and products.</text>
+  <text x="135" y="278" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Loaded once with</text>
+  <text x="135" y="300" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#e2e8f0">rake data:import_olist</text>
+
+  <!-- 2 Database + models -->
+  <rect x="270" y="130" width="190" height="200" rx="12" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+  <text x="365" y="164" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#e2e8f0">Database + models</text>
+  <text x="365" y="186" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#93c5fd">app/models</text>
+  <line x1="290" y1="200" x2="440" y2="200" stroke="#60a5fa" stroke-width="1"/>
+  <text x="365" y="228" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">PostgreSQL tables:</text>
+  <text x="365" y="250" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Customer, Order, OrderItem,</text>
+  <text x="365" y="272" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Product, Payment, Shipment.</text>
+  <text x="365" y="300" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Thin: data, no logic.</text>
+
+  <!-- 3 Services -->
+  <rect x="500" y="130" width="190" height="200" rx="12" fill="#422006" stroke="#fbbf24" stroke-width="2"/>
+  <text x="595" y="164" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#e2e8f0">Services</text>
+  <text x="595" y="186" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#fcd34d">app/services</text>
+  <line x1="520" y1="200" x2="670" y2="200" stroke="#fbbf24" stroke-width="1"/>
+  <text x="595" y="228" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">GetOrder, GetShipment,</text>
+  <text x="595" y="250" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">GetCustomer, SearchOrders.</text>
+  <text x="595" y="278" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Choose the fields the model</text>
+  <text x="595" y="300" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">may see. No AI code.</text>
+
+  <!-- 4 Tools -->
+  <rect x="730" y="130" width="190" height="200" rx="12" fill="#134e4a" stroke="#2dd4bf" stroke-width="2"/>
+  <text x="825" y="164" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#e2e8f0">Tools</text>
+  <text x="825" y="186" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#99f6e4">app/tools</text>
+  <line x1="750" y1="200" x2="900" y2="200" stroke="#2dd4bf" stroke-width="1"/>
+  <text x="825" y="228" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">GetOrderTool and three</text>
+  <text x="825" y="250" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">more. Tell the model the</text>
+  <text x="825" y="272" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">name, description and</text>
+  <text x="825" y="294" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">arguments of each tool.</text>
+
+  <!-- 5 Agent -->
+  <rect x="960" y="130" width="190" height="200" rx="12" fill="#1e293b" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="1055" y="164" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#e2e8f0">Support agent</text>
+  <text x="1055" y="186" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#cbd5e1">app/agents</text>
+  <line x1="980" y1="200" x2="1130" y2="200" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="1055" y="228" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">SupportAgent and the model.</text>
+  <text x="1055" y="250" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Allowlist of four tools.</text>
+  <text x="1055" y="278" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">The model picks the tool</text>
+  <text x="1055" y="300" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">and writes the answer.</text>
+
+  <!-- arrows between layers -->
+  <line x1="230" y1="235" x2="260" y2="235" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="270,235 260,230 260,240" fill="#94a3b8"/>
+  <line x1="460" y1="235" x2="490" y2="235" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="500,235 490,230 490,240" fill="#94a3b8"/>
+  <line x1="690" y1="235" x2="720" y2="235" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="730,235 720,230 720,240" fill="#94a3b8"/>
+  <line x1="920" y1="235" x2="950" y2="235" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="960,235 950,230 950,240" fill="#94a3b8"/>
+
+  <!-- numbered badges above the arrows -->
+  <circle cx="250" cy="208" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="250" y="213" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0">1</text>
+  <circle cx="480" cy="208" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="480" y="213" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0">2</text>
+  <circle cx="710" cy="208" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="710" y="213" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0">3</text>
+  <circle cx="940" cy="208" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="940" y="213" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0">4</text>
+
+  <!-- what moves between layers -->
+  <circle cx="52" cy="376" r="11" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="52" y="381" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#e2e8f0">1</text>
+  <text x="74" y="381" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#e2e8f0">rake data:import_olist turns CSV rows into table rows; data:generate_shipments adds the shipments (once).</text>
+  <circle cx="52" cy="408" r="11" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="52" y="413" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#e2e8f0">2</text>
+  <text x="74" y="413" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#e2e8f0">A service loads records through the models, for example Order.includes(order_items: :product).find_by(id: 4242).</text>
+  <circle cx="52" cy="440" r="11" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="52" y="445" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#e2e8f0">3</text>
+  <text x="74" y="445" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#e2e8f0">The service returns a plain Hash with named fields only, such as id, status, dates and items. No customer_id, no Olist ids.</text>
+  <circle cx="52" cy="472" r="11" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="52" y="477" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#e2e8f0">4</text>
+  <text x="74" y="477" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#e2e8f0">The tool hands the Hash to RubyLLM, which sends it to the model as JSON text. The model reads it and writes the answer.</text>
+
+  <!-- the question travels back -->
+  <rect x="40" y="508" width="1110" height="106" rx="12" fill="#1e293b" stroke="#475569" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="60" y="538" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#e2e8f0">The other direction: one customer question</text>
+  <text x="60" y="564" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#cbd5e1">Customer asks: Where is my order 4242?  →  model chooses get_order(order_id: 4242)  →  GetOrderTool</text>
+  <text x="60" y="588" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#cbd5e1">→  GetOrder.call(4242)  →  Order.includes(...).find_by(id: 4242)  →  PostgreSQL, then the Hash goes back up the stack.</text>
+</svg>

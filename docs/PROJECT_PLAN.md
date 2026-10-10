@@ -270,5 +270,6 @@ The project choice is locked. New project plans from other tools are not conside
   - [x] `GetShipment`, `GetCustomer`, `SearchOrders`: same shape as `GetOrder`
   - [x] Wrap the plain tools for RubyLLM and give `SupportAgent` an allowlist of read tools
   - [x] Console proof: the model picks `get_order` for "where is my order #1042?" and answers from the result
-  - [ ] Specs: each tool alone, plus one recorded cassette of a tool-calling run
-  - [ ] Write `lessons/03-read-tools.md` (concept, what broke, proof), tag `lesson-03`
+  - [x] Specs: each tool alone, plus one recorded cassette of a tool-calling run
+  - [x] Write `lessons/03-read-tools.md` (concept, what broke, proof)
+  - [ ] Tag `lesson-03` on the merge commit of the lesson 3 pull request

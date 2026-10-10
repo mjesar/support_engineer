@@ -10,6 +10,7 @@ lesson pages in order.
 | [FAQ.md](FAQ.md) | Short answers to questions that came up while building, such as MCP client versus server. |
 | [lessons/01-data-model-and-import.md](lessons/01-data-model-and-import.md) | Lesson 1: progress checklist, decisions, what broke and measured results. |
 | [lessons/02-first-llm-call.md](lessons/02-first-llm-call.md) | Lesson 2: Groq through RubyLLM 2.x, the agent and its prompt, testing with recorded calls. |
+| [lessons/03-read-tools.md](lessons/03-read-tools.md) | Lesson 3: four read tools, how data reaches the agent (diagram), design decisions, what broke. |
 
 ## Conventions
 
