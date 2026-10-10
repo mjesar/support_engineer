@@ -14,7 +14,7 @@ Last updated: 2026-10-10
 - [x] `SupportAgent` has an allowlist of the four tools
 - [x] Console proof: the model picks `get_order`, `get_shipment` and `search_orders` for matching questions
 - [x] Specs for the services, the wrappers, and one recorded tool-calling run
-- [ ] Tag `lesson-03` on the merge commit of the lesson 3 pull request
+- [x] Tag `lesson-03` on the merge commit of the lesson 3 pull request
 
 ## How data reaches the agent
 
