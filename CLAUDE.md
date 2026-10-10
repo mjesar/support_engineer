@@ -46,7 +46,9 @@ opening the repo should understand it in minutes. In practice:
 ```
 app/
   models/        data (Customer, Order, ...), thin
-  tools/         plain Ruby tools the agent and MCP both wrap (read vs write kept visibly apart)
+  services/      plain Ruby classes with the logic (GetOrder, ...); no AI code, read vs write kept visibly apart
+  tools/         RubyLLM::Tool wrappers: what the agent sees (name, description, arguments), each calls a service
+  mcp_tools/     MCP::Tool wrappers for Claude and Inspector (Lesson 5), each calls the same service
   agents/        the agent loop, router and prompts
   rag/           chunking, embeddings, retrieval
   controllers/, views/   chat and approval screens (Hotwire)
