@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/status-learning%20project-f59e0b" alt="Status: learning project">
 </p>
 
-> **Status:** Lesson 1 of 14 is done: a normal Rails app with real and planted data, and no AI yet. Lesson 2 (the first LLM call) is next. This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
+> **Status:** Lessons 1 to 3 of 14 are done: real and planted data, the first LLM call, and four read tools the model chooses between. Lesson 4 (the agent loop, written by hand) is next. This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
 
 ## The problem
 
@@ -103,10 +103,10 @@ duplicate charge: order 5
 3. Check that everything works:
 
 ```bash
-bundle exec rspec    # 20 examples, 0 failures
+bundle exec rspec    # 58 examples, 0 failures
 ```
 
-For a quick try, `LIMIT=200 bin/rails data:import_olist` loads only 200 customers and their orders in under a minute. There is no chat or web screen yet, so there is nothing to open in a browser. The agent arrives from lesson 2.
+For a quick try, `LIMIT=200 bin/rails data:import_olist` loads only 200 customers and their orders in under a minute. There is no chat or web screen yet, so there is nothing to open in a browser. The agent runs from the Rails console (lessons 2 and 3).
 
 ## Tech stack
 
@@ -128,8 +128,8 @@ Three milestones, 14 lessons. Each lesson changes the same application and gets 
 
 **Milestone 1: a working support agent**
 1. A normal Rails app with real and planted data (no AI yet) **(done)**
-2. First LLM call and structured output
-3. Tool calling with read tools
+2. First LLM call and structured output **(done)**
+3. Tool calling with read tools **(done)**
 4. The agent loop, written by hand
 5. MCP server and Claude connector
 6. RAG over policy documents
@@ -191,5 +191,6 @@ This is a learning project about building a reliable AI agent, not a complete su
 - The database tables and how they relate, as a diagram: [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
 - Lesson progress, decisions and what broke: [docs/lessons/01-data-model-and-import.md](docs/lessons/01-data-model-and-import.md)
 - Lesson 2, the first LLM call: [docs/lessons/02-first-llm-call.md](docs/lessons/02-first-llm-call.md)
+- Lesson 3, tool calling with read tools: [docs/lessons/03-read-tools.md](docs/lessons/03-read-tools.md)
 - Index of all documentation: [docs/README.md](docs/README.md)
 - Where the code lives: this GitHub repo is the source of truth, and pull requests and issues are here. A read-only mirror is kept on [GitLab](https://gitlab.com/mjesar/support_engineer).
