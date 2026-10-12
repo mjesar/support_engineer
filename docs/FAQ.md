@@ -101,3 +101,111 @@ or a local `stdio` process. Hosted servers usually need OAuth or a bearer token.
 This project does not use it yet (checked 2026-10-10): the course plan has the MCP server side in
 Lesson 5 and no lesson where the agent calls an outside server. The `ai_shop_assistant` project
 does this against Shopify's Catalog API.
+
+## What is `AgentTools` for in the hand-written agent loop?
+
+It is the bridge between the model and the Ruby tool classes. The model only reads and writes text, so
+two translations are needed, and `AgentTools` does both:
+
+1. **Code to model.** `definitions` turns the tool wrapper classes into the JSON `tools` list that
+   Groq expects (name, description, argument schema). It is sent with every request.
+2. **Model to code.** `run(name, arguments)` takes the tool name the model asked for (`"get_order"`) and
+   its parsed arguments, finds the matching tool and executes it.
+
+It is also the allowlist. The model can only run the tools passed to `AgentTools.new`; an invented name
+such as `delete_order` returns an error hash and nothing runs.
+
+```
+AgentLoop            keeps the messages, repeats until the model answers
+  ├─ LlmClient       talks to Groq
+  └─ AgentTools      lists the tools and runs them by name
+       └─ GetOrderTool → GetOrder → database
+```
+
+The wrapper classes (`RubyLLM::Tool`) stay the only place that describes a tool, so the hand-written
+loop and `SupportAgent` send the model identical tool descriptions. Only the declarations are reused;
+the loop itself is hand-written. `AgentLoop` parses the raw `arguments` JSON string before calling
+`run`, so `AgentTools` only ever sees a hash.
+
+## What is an agent loop, and how does it work?
+
+An agent loop is a `loop` around the model call. The model can only read and write text, so it cannot
+look anything up itself. It asks for a tool, the code runs it, and the result goes back to the model.
+This repeats until the model answers in plain text.
+
+The model has no memory between calls, so the loop keeps the `messages` array (the context) and sends
+all of it every time. Each round adds to it:
+
+1. The user question is added.
+2. The model replies with `tool_calls` (a request, no `content`) or with `content` (the answer).
+3. The model's reply is added to `messages`, so the history stays complete.
+4. For each tool call, the code runs the tool and adds a `tool` message. Its `tool_call_id` links the
+   result to the request it answers, and its `content` must be a string (`result.to_json`).
+5. The model is called again with the longer `messages`.
+
+```
+ask model → tool_calls? → yes → run tools, add results to messages → ask model again
+                        → no  → the content is the answer, stop
+```
+
+The model decides how many rounds happen, which is what makes it an agent and not a fixed pipeline. A
+normal LLM call is one round trip. An agent loop is many, with tool results in between.
+
+The stop condition is "the reply has no `tool_calls`". Because the model controls it, the loop needs
+safety rails: a step limit (with a stop reason), unknown tool names, and arguments that are not valid
+JSON. Without a step limit, a model that keeps asking for tools loops forever.
+
+Frameworks such as RubyLLM run this same loop inside `chat.ask`. Writing it by hand once (Lesson 4)
+shows what they hide.
+
+## Are safety rails and guardrails the same thing?
+
+They overlap and people use the words loosely, but in this project they mean two layers.
+
+**Safety rails** are technical limits that keep the agent loop from breaking. They do not judge what
+the agent says. Examples: a step limit so the loop cannot run forever, an unknown tool name returning an
+error instead of running something, and invalid JSON arguments being caught instead of crashing the
+run. They matter even if the model behaves well, because it can still make mechanical mistakes.
+
+**Guardrails** is the broader industry term for rules about content and behavior:
+
+- Input checks: block prompt injection, detect personal data, refuse off-topic requests.
+- Output checks: do not leak another customer's data, do not promise a refund the policy does not allow.
+- Action limits: a human approves risky actions (the approval screen for write tools, Lesson 9).
+- Permissions: the allowlist of tools, and read tools kept apart from write tools.
+
+| | Safety rails | Guardrails |
+| --- | --- | --- |
+| Question | Can the loop run without breaking? | Should the agent say or do this? |
+| Example | Stop after 5 steps | A refund over a limit needs approval |
+| Where | Inside `AgentLoop` | Around it, and in tools, prompts and approval screens |
+
+Guardrails include some safety rails: the `AgentTools` allowlist is both a loop-robustness feature and a
+guardrail on what the model may do.
+
+## Why write the agent loop by hand if RubyLLM already does it?
+
+"Hand-written" means the loop is plain Ruby in this repo (`AgentLoop`), not hidden inside a library.
+The result is the same. The difference is whether you can see it.
+
+- **With RubyLLM:** `chat.ask(question)` runs the whole loop in one call. It sends the messages, sees
+  `tool_calls`, runs the tool, adds the result and asks again until the model answers. The loop is
+  there, but you never see it.
+- **By hand (Lesson 4):** `AgentLoop` is the same loop in about 25 lines. We build the `messages`
+  array, call Groq through Faraday, parse the arguments and add each tool result ourselves.
+
+Reasons to write it once:
+
+- **Understanding.** A hidden loop is hard to debug. After writing it, you know what a framework does
+  when it misbehaves.
+- **Interviews.** "How does an agent work?" is easy to answer when you have built the loop: what
+  `tool_calls` looks like, why the reply goes back into the history, why a step limit is needed.
+- **Failure modes.** Writing the safety rails (step limit, invalid JSON, unknown tool) shows why a
+  framework needs them too.
+
+It is not the better way for real work. From Lesson 5 on the project uses RubyLLM, which also handles
+streaming, retries, structured output and several providers, none of which are worth rebuilding.
+
+The lesson ends with a check: the same question goes through `AgentLoop` and through `SupportAgent`
+(RubyLLM), and both should make the same tool calls. If they do, the framework is doing what the
+hand-written loop does.

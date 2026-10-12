@@ -1,0 +1,274 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"openai/gpt-oss-120b","messages":[{"role":"user","content":"Where
+        is my order 4242?"}],"tools":[{"type":"function","function":{"name":"get_order","description":"Looks
+        up one order by its id. Returns its status, purchase, shipping and delivery
+        dates, and the items with name, category, price and whether they are final
+        sale.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"get_shipment","description":"Looks
+        up where the package of an order is. Takes the order id, not a shipment id.
+        Returns the shipment status, carrier, tracking number, last known location
+        and last scan time. Returns an error if the order has not shipped yet.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"get_customer","description":"Looks
+        up a customer by id. Returns their name, city and state. It does not return
+        contact details or orders; use search_orders to list a customer''s orders.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"}},"required":["customer_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"search_orders","description":"Lists
+        a customer''s most recent orders, newest first, up to 10, with the real total
+        count. Each entry has the order id, status and dates. Use it when the customer
+        does not know their order id, then call get_order for the details of one order.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"},"status":{"type":"string","description":"Only
+        orders with this status: created, approved, invoiced, processing, shipped,
+        delivered, canceled or unavailable"}},"required":["customer_id"],"additionalProperties":false}}}],"include_reasoning":false}'
+    headers:
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      User-Agent:
+      - Faraday v2.14.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 12 Oct 2026 16:43:50 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Server:
+      - cloudflare
+      Vary:
+      - Origin
+      X-Groq-Region:
+      - bom
+      X-Ratelimit-Limit-Requests:
+      - '1000'
+      X-Ratelimit-Limit-Tokens:
+      - '8000'
+      X-Ratelimit-Remaining-Requests:
+      - '996'
+      X-Ratelimit-Remaining-Tokens:
+      - '7226'
+      X-Ratelimit-Reset-Requests:
+      - 5m45.6s
+      X-Ratelimit-Reset-Tokens:
+      - 5.805s
+      X-Request-Id:
+      - req_01m4rfzgkhemts2f7jy51323xc
+      Set-Cookie:
+      - __cf_bm=5TDYd7uTMMS2FIJClUqs1ov0HnSKm5LVwyUbQ3eyFWA-1791823430.2059543-1.0.1.1-6sjaVi87pIaFgq8DiiNGQkIE20tT4IRHkBbtz0XO9ZtbEHMIoTUnIncCtJ_peSFKuK8tPFyPkQMROVfZ6Tdpd0_Boxg1DAbQJfTOPNsa8E_zMJQuNz9f0FZhZcNXA.TH;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Mon, 12
+        Oct 2026 17:13:50 GMT
+      Via:
+      - 1.1 google
+      Strict-Transport-Security:
+      - max-age=15552000
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a49790d6c9f15f7d-SIN
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-452db371-7778-4e4c-8fd6-bcbcba44531f","object":"chat.completion","created":1791823430,"model":"openai/gpt-oss-120b","choices":[{"index":0,"message":{"role":"assistant","tool_calls":[{"id":"fc_046b58bc-ece1-406b-a865-17011e8bd307","type":"function","function":{"name":"get_shipment","arguments":"{\"order_id\":4242}"}}]},"logprobs":null,"finish_reason":"tool_calls"}],"usage":{"queue_time":0.338176654,"prompt_tokens":440,"prompt_time":0.018495674,"completion_tokens":70,"completion_time":0.147806128,"total_tokens":510,"total_time":0.166301802,"completion_tokens_details":{"reasoning_tokens":40}},"usage_breakdown":null,"system_fingerprint":"fp_4200b3f836","x_groq":{"id":"req_01m4rfzgkhemts2f7jy51323xc","seed":1113271383},"service_tier":"on_demand"}
+
+        '
+  recorded_at: Mon, 12 Oct 2026 16:43:50 GMT
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"openai/gpt-oss-120b","messages":[{"role":"user","content":"Where
+        is my order 4242?"},{"role":"assistant","tool_calls":[{"id":"fc_046b58bc-ece1-406b-a865-17011e8bd307","type":"function","function":{"name":"get_shipment","arguments":"{\"order_id\":4242}"}}]},{"role":"tool","tool_call_id":"fc_046b58bc-ece1-406b-a865-17011e8bd307","content":"{\"error\":\"Order
+        4242 has no shipment\"}"}],"tools":[{"type":"function","function":{"name":"get_order","description":"Looks
+        up one order by its id. Returns its status, purchase, shipping and delivery
+        dates, and the items with name, category, price and whether they are final
+        sale.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"get_shipment","description":"Looks
+        up where the package of an order is. Takes the order id, not a shipment id.
+        Returns the shipment status, carrier, tracking number, last known location
+        and last scan time. Returns an error if the order has not shipped yet.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"get_customer","description":"Looks
+        up a customer by id. Returns their name, city and state. It does not return
+        contact details or orders; use search_orders to list a customer''s orders.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"}},"required":["customer_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"search_orders","description":"Lists
+        a customer''s most recent orders, newest first, up to 10, with the real total
+        count. Each entry has the order id, status and dates. Use it when the customer
+        does not know their order id, then call get_order for the details of one order.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"},"status":{"type":"string","description":"Only
+        orders with this status: created, approved, invoiced, processing, shipped,
+        delivered, canceled or unavailable"}},"required":["customer_id"],"additionalProperties":false}}}],"include_reasoning":false}'
+    headers:
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      User-Agent:
+      - Faraday v2.14.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 12 Oct 2026 16:43:51 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Server:
+      - cloudflare
+      Vary:
+      - Origin
+      X-Groq-Region:
+      - bom
+      X-Ratelimit-Limit-Requests:
+      - '1000'
+      X-Ratelimit-Limit-Tokens:
+      - '8000'
+      X-Ratelimit-Remaining-Requests:
+      - '995'
+      X-Ratelimit-Remaining-Tokens:
+      - '6817'
+      X-Ratelimit-Reset-Requests:
+      - 7m12s
+      X-Ratelimit-Reset-Tokens:
+      - 8.872s
+      X-Request-Id:
+      - req_01m4rfzhmjeh1rx76enst4x47q
+      Via:
+      - 1.1 google
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=47aL_XnePEzuehLHwBi6Xc4sJP0O_1Vxv8Ir6GAHLWI-1791823431.2634177-1.0.1.1-fnDqVcFy_d9p1fQsl.y8apXHjFlLhcJe7LWBz0GFGXOoo18HC13t9lX7ClguFcPwhkls4.Xh8jWQqjL_aUQ.b2K90kBqtQRl9AMqsSKoJ3Yam7jQrLzR1MJnBKpmIUUk;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Mon, 12
+        Oct 2026 17:13:51 GMT
+      Strict-Transport-Security:
+      - max-age=15552000
+      Cf-Ray:
+      - a49790dd6a75411d-SIN
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-c45fb532-b9a9-4795-8c70-5250157c8554","object":"chat.completion","created":1791823431,"model":"openai/gpt-oss-120b","choices":[{"index":0,"message":{"role":"assistant","tool_calls":[{"id":"fc_b84b9c4f-2b8b-48aa-ab1b-2b90f3afa68a","type":"function","function":{"name":"get_order","arguments":"{\"order_id\":4242}"}}]},"logprobs":null,"finish_reason":"tool_calls"}],"usage":{"queue_time":0.392601226,"prompt_tokens":479,"prompt_time":0.024133861,"completion_tokens":56,"completion_time":0.117754548,"total_tokens":535,"total_time":0.141888409,"completion_tokens_details":{"reasoning_tokens":33}},"usage_breakdown":null,"system_fingerprint":"fp_9241e9962b","x_groq":{"id":"req_01m4rfzhmjeh1rx76enst4x47q","seed":374366644},"service_tier":"on_demand"}
+
+        '
+  recorded_at: Mon, 12 Oct 2026 16:43:51 GMT
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"openai/gpt-oss-120b","messages":[{"role":"user","content":"Where
+        is my order 4242?"},{"role":"assistant","tool_calls":[{"id":"fc_046b58bc-ece1-406b-a865-17011e8bd307","type":"function","function":{"name":"get_shipment","arguments":"{\"order_id\":4242}"}}]},{"role":"tool","tool_call_id":"fc_046b58bc-ece1-406b-a865-17011e8bd307","content":"{\"error\":\"Order
+        4242 has no shipment\"}"},{"role":"assistant","tool_calls":[{"id":"fc_b84b9c4f-2b8b-48aa-ab1b-2b90f3afa68a","type":"function","function":{"name":"get_order","arguments":"{\"order_id\":4242}"}}]},{"role":"tool","tool_call_id":"fc_b84b9c4f-2b8b-48aa-ab1b-2b90f3afa68a","content":"{\"id\":4242,\"status\":\"shipped\",\"purchased_at\":\"2026-09-20T00:00:00.000Z\",\"shipped_at\":\"2026-09-24T00:00:00.000Z\",\"delivered_at\":null,\"estimated_delivery_at\":\"2026-10-01T00:00:00.000Z\",\"items\":[]}"}],"tools":[{"type":"function","function":{"name":"get_order","description":"Looks
+        up one order by its id. Returns its status, purchase, shipping and delivery
+        dates, and the items with name, category, price and whether they are final
+        sale.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"get_shipment","description":"Looks
+        up where the package of an order is. Takes the order id, not a shipment id.
+        Returns the shipment status, carrier, tracking number, last known location
+        and last scan time. Returns an error if the order has not shipped yet.","parameters":{"type":"object","properties":{"order_id":{"type":"integer","description":"The
+        order id the customer gives, for example 1042"}},"required":["order_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"get_customer","description":"Looks
+        up a customer by id. Returns their name, city and state. It does not return
+        contact details or orders; use search_orders to list a customer''s orders.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"}},"required":["customer_id"],"additionalProperties":false}}},{"type":"function","function":{"name":"search_orders","description":"Lists
+        a customer''s most recent orders, newest first, up to 10, with the real total
+        count. Each entry has the order id, status and dates. Use it when the customer
+        does not know their order id, then call get_order for the details of one order.","parameters":{"type":"object","properties":{"customer_id":{"type":"integer","description":"The
+        customer id, for example 68585"},"status":{"type":"string","description":"Only
+        orders with this status: created, approved, invoiced, processing, shipped,
+        delivered, canceled or unavailable"}},"required":["customer_id"],"additionalProperties":false}}}],"include_reasoning":false}'
+    headers:
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      User-Agent:
+      - Faraday v2.14.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 12 Oct 2026 16:43:54 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Server:
+      - cloudflare
+      Vary:
+      - Origin
+      X-Groq-Region:
+      - bom
+      X-Ratelimit-Limit-Requests:
+      - '1000'
+      X-Ratelimit-Limit-Tokens:
+      - '8000'
+      X-Ratelimit-Remaining-Requests:
+      - '994'
+      X-Ratelimit-Remaining-Tokens:
+      - '6297'
+      X-Ratelimit-Reset-Requests:
+      - 8m38.4s
+      X-Ratelimit-Reset-Tokens:
+      - 12.772s
+      X-Request-Id:
+      - req_01m4rfzjm5ejw8042k69bb68br
+      Set-Cookie:
+      - __cf_bm=HerrXfr8zTtyukGzjEgyxLcCILOiohilMbMauuCkjfw-1791823432.2810361-1.0.1.1-KGxnMIHQmPyMm2j6jzao7qCUDx9c8_UgvqdvvH83ryIoCiZUH6PNir4HwEmkBn4OKCfEU7nHAFqTM0IzBD5uv5gMQq_yRhwV45heMB04EPcOsQqwcEDdnCB5U_vSeSaH;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=groq.com; Expires=Mon, 12
+        Oct 2026 17:13:54 GMT
+      Via:
+      - 1.1 google
+      Strict-Transport-Security:
+      - max-age=15552000
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Ray:
+      - a49790e3bdcbd837-SIN
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6ImNoYXRjbXBsLTg2ZDE1N2NmLTA1ZDYtNDY4Yi04NjYwLWZhZjVjZmYyZWY5NyIsIm9iamVjdCI6ImNoYXQuY29tcGxldGlvbiIsImNyZWF0ZWQiOjE3OTE4MjM0MzQsIm1vZGVsIjoib3BlbmFpL2dwdC1vc3MtMTIwYiIsImNob2ljZXMiOlt7ImluZGV4IjowLCJtZXNzYWdlIjp7InJvbGUiOiJhc3Npc3RhbnQiLCJjb250ZW50IjoiWW91ciBvcmRlciAqKiM0MjQyKiogaGFzIGFscmVhZHkgYmVlbiBzaGlwcGVkIChpdCBsZWZ0IG91ciB3YXJlaG91c2Ugb27igK9TZXB0ZW1iZXLigK8yNCzigK8yMDI2KS4gV2hpbGUgYSBkZXRhaWxlZCB0cmFja2luZyByZWNvcmQgaXNu4oCZdCBhdmFpbGFibGUgeWV0LCB0aGUgc3lzdGVtIGVzdGltYXRlcyB0aGF0IGl0IHNob3VsZCBhcnJpdmUgYXJvdW5kICoqT2N0b2JlcuKArzEs4oCvMjAyNioqLlxuXG5JZiB5b3XigJlkIGxpa2UgYSB0cmFja2luZyBudW1iZXIgb3IgbW9yZSBwcmVjaXNlIGxvY2F0aW9uIHVwZGF0ZXMsIGp1c3QgbGV0IG1lIGtub3cgYW5kIEkgY2FuIGNoZWNrIGFnYWluIGluIGEgZGF5IG9yIHR3byB3aGVuIHRoZSBjYXJyaWVy4oCZcyBzY2FuIGRhdGEgaXMgYXZhaWxhYmxlLiJ9LCJsb2dwcm9icyI6bnVsbCwiZmluaXNoX3JlYXNvbiI6InN0b3AifV0sInVzYWdlIjp7InF1ZXVlX3RpbWUiOjAuMzM4MTAzMTE0LCJwcm9tcHRfdG9rZW5zIjo1ODUsInByb21wdF90aW1lIjoxLjcyMzcwNjkzNSwiY29tcGxldGlvbl90b2tlbnMiOjE3NSwiY29tcGxldGlvbl90aW1lIjowLjM2MjcxNjM2MywidG90YWxfdG9rZW5zIjo3NjAsInRvdGFsX3RpbWUiOjIuMDg2NDIzMjk4LCJwcm9tcHRfdG9rZW5zX2RldGFpbHMiOnsiY2FjaGVkX3Rva2VucyI6MjU2fSwiY29tcGxldGlvbl90b2tlbnNfZGV0YWlscyI6eyJyZWFzb25pbmdfdG9rZW5zIjo3Nn19LCJ1c2FnZV9icmVha2Rvd24iOm51bGwsInN5c3RlbV9maW5nZXJwcmludCI6ImZwXzQyMDBiM2Y4MzYiLCJ4X2dyb3EiOnsiaWQiOiJyZXFfMDFtNHJmemptNWVqdzgwNDJrNjliYjY4YnIiLCJzZWVkIjo4NDk4MjQwOTJ9LCJzZXJ2aWNlX3RpZXIiOiJvbl9kZW1hbmQifQo=
+  recorded_at: Mon, 12 Oct 2026 16:43:54 GMT
+recorded_with: VCR 6.4.0

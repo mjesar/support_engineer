@@ -462,6 +462,7 @@ DEPENDENCIES
   dotenv-rails (~> 3.2)
   factory_bot_rails
   faker
+  faraday
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

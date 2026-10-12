@@ -77,3 +77,4 @@ end
 
 gem "csv"
 gem "ruby_llm"
+gem "faraday"

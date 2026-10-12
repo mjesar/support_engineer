@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/status-learning%20project-f59e0b" alt="Status: learning project">
 </p>
 
-> **Status:** Lessons 1 to 3 of 14 are done: real and planted data, the first LLM call, and four read tools the model chooses between. Lesson 4 (the agent loop, written by hand) is next. This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
+> **Status:** Lessons 1 to 4 of 14 are done: real and planted data, the first LLM call, four read tools the model chooses between, and the agent loop written by hand. Lesson 5 (an MCP server over the same tools) is next. This is a learning project, built step by step, not a finished product. The plan below describes where it is going, not what works today.
 
 ## The problem
 
@@ -120,7 +120,7 @@ For a quick try, `LIMIT=200 bin/rails data:import_olist` loads only 200 customer
 | Observability | OpenTelemetry, Langfuse |
 | Evals | eval-ruby, rspec-agents |
 
-Gems are added in the lesson that needs them, not all at once. All LLM calls will go through one small `LlmClient` class, so changing provider is a config change.
+Gems are added in the lesson that needs them, not all at once. The hand-written loop in Lesson 4 talks to Groq through one small `LlmClient`. From Lesson 5 on the app uses RubyLLM, so changing provider is a config change.
 
 ## Roadmap
 
@@ -192,5 +192,6 @@ This is a learning project about building a reliable AI agent, not a complete su
 - Lesson progress, decisions and what broke: [docs/lessons/01-data-model-and-import.md](docs/lessons/01-data-model-and-import.md)
 - Lesson 2, the first LLM call: [docs/lessons/02-first-llm-call.md](docs/lessons/02-first-llm-call.md)
 - Lesson 3, tool calling with read tools: [docs/lessons/03-read-tools.md](docs/lessons/03-read-tools.md)
+- Lesson 4, the agent loop written by hand: [docs/lessons/04-agent-loop.md](docs/lessons/04-agent-loop.md)
 - Index of all documentation: [docs/README.md](docs/README.md)
 - Where the code lives: this GitHub repo is the source of truth, and pull requests and issues are here. A read-only mirror is kept on [GitLab](https://gitlab.com/mjesar/support_engineer).
