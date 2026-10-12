@@ -272,5 +272,5 @@ The project choice is locked. New project plans from other tools are not conside
   - [x] Safety rails: a step limit with a stop reason, an unknown tool name, arguments that are not valid JSON
   - [x] A trace of the run: each model request, each tool call and its result, and the stop reason
   - [x] Console proof: the same question through `AgentLoop` and through `SupportAgent` makes the same tool calls
-  - [ ] Specs: one recorded run (order 4242), the step limit and the unknown tool with a stubbed client
+  - [x] Specs: one recorded run (order 4242), the step limit and the unknown tool with a stubbed client
   - [ ] Lesson page with a loop diagram, a FAQ entry on the agent loop, a gem-gap line in `~/.claude/IDEAS.md` (RubyLLM already covers this), tag `lesson-04`

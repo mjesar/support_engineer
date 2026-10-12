@@ -72,7 +72,7 @@ model answers from the result                  "Your order #1 has been shipped .
 ```
 
 `chat.ask` runs this whole loop itself and stops when the model answers instead of asking for a tool.
-Lesson 4 writes the same loop by hand, one step at a time, using `step`, `generate` and `run_tools`.
+[Lesson 4](04-agent-loop.md) writes the same loop by hand, in plain Ruby, and checks that it makes the same tool calls.
 
 What the model reads to choose a tool is the tool's `description` and argument schema, nothing else.
 In the console, "Where is the package for my order 1?" led to `get_shipment`, and "I am customer 68585.
