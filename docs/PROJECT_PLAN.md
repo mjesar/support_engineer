@@ -266,11 +266,11 @@ The project choice is locked. New project plans from other tools are not conside
 - [x] Lesson 3: tool calling with read tools, tagged `lesson-03`. Details: [lessons/03-read-tools.md](lessons/03-read-tools.md)
 - [ ] Lesson 4: the agent loop, written by hand with no framework (branch `lesson-04-agent-loop`)
   - [x] Read Groq's tool-calling format in its docs, then send one raw request in the console: `messages`, `tools`, the `tool_calls` in the reply, and the `tool` message that answers it
-  - [ ] `LlmClient`: one small class that posts the messages and tool definitions to Groq and returns the assistant message
-  - [ ] Tool definitions for the loop, and a name to service map that runs the four existing services
-  - [ ] `AgentLoop`: keeps the messages (the context), calls the model, runs any tool calls, appends the results, repeats until the model answers
-  - [ ] Safety rails: a step limit with a stop reason, an unknown tool name, arguments that are not valid JSON
-  - [ ] A trace of the run: each model request, each tool call and its result, and the stop reason
-  - [ ] Console proof: the same question through `AgentLoop` and through `SupportAgent` makes the same tool calls
+  - [x] `LlmClient`: one small class that posts the messages and tool definitions to Groq and returns the assistant message
+  - [x] Tool definitions for the loop, and a name to service map that runs the four existing services
+  - [x] `AgentLoop`: keeps the messages (the context), calls the model, runs any tool calls, appends the results, repeats until the model answers
+  - [x] Safety rails: a step limit with a stop reason, an unknown tool name, arguments that are not valid JSON
+  - [x] A trace of the run: each model request, each tool call and its result, and the stop reason
+  - [x] Console proof: the same question through `AgentLoop` and through `SupportAgent` makes the same tool calls
   - [ ] Specs: one recorded run (order 4242), the step limit and the unknown tool with a stubbed client
   - [ ] Lesson page with a loop diagram, a FAQ entry on the agent loop, a gem-gap line in `~/.claude/IDEAS.md` (RubyLLM already covers this), tag `lesson-04`
