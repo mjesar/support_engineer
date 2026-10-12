@@ -182,3 +182,30 @@ run. They matter even if the model behaves well, because it can still make mecha
 
 Guardrails include some safety rails: the `AgentTools` allowlist is both a loop-robustness feature and a
 guardrail on what the model may do.
+
+## Why write the agent loop by hand if RubyLLM already does it?
+
+"Hand-written" means the loop is plain Ruby in this repo (`AgentLoop`), not hidden inside a library.
+The result is the same. The difference is whether you can see it.
+
+- **With RubyLLM:** `chat.ask(question)` runs the whole loop in one call. It sends the messages, sees
+  `tool_calls`, runs the tool, adds the result and asks again until the model answers. The loop is
+  there, but you never see it.
+- **By hand (Lesson 4):** `AgentLoop` is the same loop in about 25 lines. We build the `messages`
+  array, call Groq through Faraday, parse the arguments and add each tool result ourselves.
+
+Reasons to write it once:
+
+- **Understanding.** A hidden loop is hard to debug. After writing it, you know what a framework does
+  when it misbehaves.
+- **Interviews.** "How does an agent work?" is easy to answer when you have built the loop: what
+  `tool_calls` looks like, why the reply goes back into the history, why a step limit is needed.
+- **Failure modes.** Writing the safety rails (step limit, invalid JSON, unknown tool) shows why a
+  framework needs them too.
+
+It is not the better way for real work. From Lesson 5 on the project uses RubyLLM, which also handles
+streaming, retries, structured output and several providers, none of which are worth rebuilding.
+
+The lesson ends with a check: the same question goes through `AgentLoop` and through `SupportAgent`
+(RubyLLM), and both should make the same tool calls. If they do, the framework is doing what the
+hand-written loop does.
