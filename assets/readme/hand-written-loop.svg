@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">The hand-written agent loop</title>
+  <desc id="desc">AgentLoop keeps a messages list and repeats three steps. It asks the model through LlmClient, then checks whether the reply has tool calls. If yes, AgentTools runs each requested tool, the results are added to messages, and the model is asked again. If no, the reply content is the final answer and the loop stops. Planned safety rails: a step limit, unknown tool names and invalid JSON arguments.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="520" rx="16" fill="#0f172a"/>
+  <text x="40" y="48" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" fill="#e2e8f0">The hand-written agent loop</text>
+  <text x="40" y="76" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#94a3b8">The model decides how many rounds happen. The loop only repeats until it stops asking for tools.</text>
+
+  <!-- 1 Ask the model -->
+  <rect x="60" y="170" width="240" height="110" rx="12" fill="#134e4a" stroke="#2dd4bf" stroke-width="2"/>
+  <text x="180" y="208" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#99f6e4">1. Ask the model</text>
+  <text x="180" y="236" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#e2e8f0">LlmClient.chat</text>
+  <text x="180" y="258" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">sends all messages + tools</text>
+
+  <!-- 2 Decision -->
+  <polygon points="520,140 650,225 520,310 390,225" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+  <text x="520" y="218" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#e2e8f0">2. Reply has</text>
+  <text x="520" y="240" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14" fill="#e2e8f0">tool_calls?</text>
+
+  <!-- 3 Run the tools -->
+  <rect x="780" y="170" width="240" height="110" rx="12" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+  <text x="900" y="208" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#93c5fd">3. Run the tools</text>
+  <text x="900" y="236" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#e2e8f0">AgentTools.run</text>
+  <text x="900" y="258" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">one tool message per call</text>
+
+  <!-- Answer -->
+  <rect x="400" y="370" width="240" height="90" rx="12" fill="#14532d" stroke="#4ade80" stroke-width="2"/>
+  <text x="520" y="406" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#bbf7d0">Stop: the answer</text>
+  <text x="520" y="432" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">return the reply content</text>
+
+  <!-- Arrows -->
+  <line x1="300" y1="225" x2="388" y2="225" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="650" y1="225" x2="778" y2="225" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="714" y="215" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0">yes</text>
+  <line x1="520" y1="310" x2="520" y2="368" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="540" y="345" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0">no</text>
+  <polyline points="900,170 900,120 180,120 180,168" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="540" y="110" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#cbd5e1">add the results to messages, then ask again</text>
+
+  <!-- Messages notebook -->
+  <rect x="60" y="370" width="300" height="110" rx="12" fill="#162036" stroke="#64748b" stroke-width="2"/>
+  <text x="210" y="400" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#e2e8f0">messages (the context)</text>
+  <text x="80" y="428" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">user question</text>
+  <text x="80" y="448" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">assistant reply (with tool_calls)</text>
+  <text x="80" y="468" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">tool result, linked by tool_call_id</text>
+
+  <!-- Safety rails -->
+  <rect x="700" y="370" width="440" height="110" rx="12" fill="#162036" stroke="#64748b" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="920" y="400" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#e2e8f0">Safety rails (the model cannot be trusted to stop)</text>
+  <text x="720" y="428" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Step limit, with a stop reason</text>
+  <text x="720" y="448" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Unknown tool name: error back to the model</text>
+  <text x="720" y="468" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#e2e8f0">Arguments that are not valid JSON: error back too</text>
+</svg>
