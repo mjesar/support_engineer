@@ -14,6 +14,8 @@ VCR.configure do |config|
   config.filter_sensitive_data("<GROQ_API_KEY>") { RubyLLM.config.openai_api_key }
 end
 
-# RubyLLM refuses to build a chat without a key, even when VCR only replays.
-# This lets anyone run the specs from the cassettes without a Groq account.
+# RubyLLM refuses to build a chat without a key, and LlmClient reads the key from ENV,
+# even when VCR only replays. This lets anyone run the specs from the cassettes
+# without a Groq account.
 RubyLLM.config.openai_api_key ||= "replay-only-key"
+ENV["GROQ_API_KEY"] ||= "replay-only-key"
