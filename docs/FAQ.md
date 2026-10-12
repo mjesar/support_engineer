@@ -101,3 +101,28 @@ or a local `stdio` process. Hosted servers usually need OAuth or a bearer token.
 This project does not use it yet (checked 2026-10-10): the course plan has the MCP server side in
 Lesson 5 and no lesson where the agent calls an outside server. The `ai_shop_assistant` project
 does this against Shopify's Catalog API.
+
+## What is `AgentTools` for in the hand-written agent loop?
+
+It is the bridge between the model and the Ruby tool classes. The model only reads and writes text, so
+two translations are needed, and `AgentTools` does both:
+
+1. **Code to model.** `definitions` turns the tool wrapper classes into the JSON `tools` list that
+   Groq expects (name, description, argument schema). It is sent with every request.
+2. **Model to code.** `run(name, arguments)` takes the tool name the model asked for (`"get_order"`) and
+   its parsed arguments, finds the matching tool and executes it.
+
+It is also the allowlist. The model can only run the tools passed to `AgentTools.new`; an invented name
+such as `delete_order` returns an error hash and nothing runs.
+
+```
+AgentLoop            keeps the messages, repeats until the model answers
+  ├─ LlmClient       talks to Groq
+  └─ AgentTools      lists the tools and runs them by name
+       └─ GetOrderTool → GetOrder → database
+```
+
+The wrapper classes (`RubyLLM::Tool`) stay the only place that describes a tool, so the hand-written
+loop and `SupportAgent` send the model identical tool descriptions. Only the declarations are reused;
+the loop itself is hand-written. `AgentLoop` parses the raw `arguments` JSON string before calling
+`run`, so `AgentTools` only ever sees a hash.
