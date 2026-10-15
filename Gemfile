@@ -78,3 +78,5 @@ end
 gem "csv"
 gem "ruby_llm"
 gem "faraday"
+
+gem "mcp", "~> 1.7"
